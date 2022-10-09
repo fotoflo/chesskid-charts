@@ -1,0 +1,458 @@
+// 20221009081826
+// https://www.chesskid.com/callback/users/Dionz/game-history?&limit=10
+
+{
+  "items": [
+    {
+      "id": "11ed4767c2e626f6a69f246e96712abc",
+      "category": "fast",
+      "numericId": 59013499615,
+      "fen": "rnbqk2r/pppp1Qpp/5n2/4p3/1bB1P3/8/PPPP1PPP/RNB1K1NR b KQkq -",
+      "finishDate": 1665274686,
+      "humanGameInfo": {
+        "rating": 1302,
+        "timeControl": 600
+      },
+      "plyCount": 7,
+      "opponent": {
+        "user": {
+          "id": "11ecd41b4a39a3be94cb614737020040",
+          "numericId": 16470588,
+          "username": "GoldSunnyTreasure",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 17,
+          "timeZone": "Australia/Brisbane",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-321.png",
+            "fileName": "kid-321.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 8,
+            "piece": "rook",
+            "number": 1,
+            "stars": 0
+          },
+          "joinDate": 1652597421,
+          "starsAllTime": 980
+        },
+        "rating": 817
+      },
+      "playerColor": 1,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0KfA9zdN!TN1"
+    },
+    {
+      "id": "11ed4764f7c073eaa69f246e96712abc",
+      "category": "fast",
+      "numericId": 59012299611,
+      "fen": "2r5/pbQp4/k1p5/1p6/3P4/Q7/PP3PP1/RN3K2 b - -",
+      "finishDate": 1665274120,
+      "humanGameInfo": {
+        "rating": 1301,
+        "timeControl": 900
+      },
+      "plyCount": 55,
+      "opponent": {
+        "user": {
+          "id": "11ecbc4d9635ef06b621614737020040",
+          "numericId": 16268186,
+          "username": "NiceBeamingKitten",
+          "realName": null,
+          "membershipLevel": "gold",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 2,
+          "timeZone": "America/Los_Angeles",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-720.png",
+            "fileName": "kid-720.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 34,
+            "piece": "king",
+            "number": 12,
+            "stars": 75
+          },
+          "joinDate": 1649980196,
+          "starsAllTime": 1818
+        },
+        "rating": 1156
+      },
+      "playerColor": 1,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0KfA!TgvYQvK7GK1?!1R9RA!T!egGKfe!TlBKpgfpNCKRzKTzedN2UN3ezT1873!7Ycl5OlzOz1~zk9DYP!rPGDYXPrsGOsk6XkU46UtPHtq"
+    },
+    {
+      "id": "11ed47647159692ba69f246e96712abc",
+      "category": "fast",
+      "numericId": 59012299515,
+      "fen": "rnb2rk1/pppq1ppp/3p4/4p1B1/2B1P1n1/2NP1N2/PPP3PP/R3QK2 b - -",
+      "finishDate": 1665273425,
+      "humanGameInfo": {
+        "rating": 1295,
+        "timeControl": 900
+      },
+      "plyCount": 19,
+      "opponent": {
+        "user": {
+          "id": "11eb993e1111c93689f35e043e020040",
+          "numericId": 12965876,
+          "username": "AngelDavidR",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 34,
+          "timeZone": "America/Bogota",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-417.png",
+            "fileName": "kid-417.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 33,
+            "piece": "king",
+            "number": 11,
+            "stars": 75
+          },
+          "joinDate": 1617977741,
+          "starsAllTime": 12613
+        },
+        "rating": 1310
+      },
+      "playerColor": 2,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0KfA!Tbs9IgvTEeg8!ltZRcM7ZfeIngfnede"
+    },
+    {
+      "id": "11ed4764497724dda69f246e96712abc",
+      "category": "fast",
+      "numericId": 59012299483,
+      "fen": "rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR b KQkq -",
+      "finishDate": 1665273179,
+      "humanGameInfo": {
+        "rating": 1287,
+        "timeControl": 900
+      },
+      "plyCount": 3,
+      "opponent": {
+        "user": {
+          "id": "11eb993e1111c93689f35e043e020040",
+          "numericId": 12965876,
+          "username": "AngelDavidR",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 34,
+          "timeZone": "America/Bogota",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-417.png",
+            "fileName": "kid-417.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 33,
+            "piece": "king",
+            "number": 11,
+            "stars": 75
+          },
+          "joinDate": 1617977741,
+          "starsAllTime": 12613
+        },
+        "rating": 1310
+      },
+      "playerColor": 1,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0KfA"
+    },
+    {
+      "id": "11ed4763e3ca6525a69f246e96712abc",
+      "category": "fast",
+      "numericId": 59011699643,
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq -",
+      "finishDate": 1665273020,
+      "humanGameInfo": {
+        "rating": 1279,
+        "timeControl": 900
+      },
+      "plyCount": 0,
+      "opponent": {
+        "user": {
+          "id": "11e74cf5986b5ac680004a7860020040",
+          "numericId": 2596039,
+          "username": "AbruptTest",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 2,
+          "timeZone": "America/New_York",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-693.png",
+            "fileName": "kid-693.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 23,
+            "piece": "king",
+            "number": 1,
+            "stars": 75
+          },
+          "joinDate": 1497000336,
+          "starsAllTime": 230136
+        },
+        "rating": 1633
+      },
+      "playerColor": 1,
+      "result": "loss",
+      "type": "chess",
+      "moves": ""
+    },
+    {
+      "id": "11ed4761f67166d8a69f246e96712abc",
+      "category": "fast",
+      "numericId": 59011099587,
+      "fen": "k2r4/p1p5/2p2p2/Q1Kp4/2qP4/2P4p/PP6/8 w - -",
+      "finishDate": 1665272865,
+      "humanGameInfo": {
+        "rating": 1281,
+        "timeControl": 900
+      },
+      "plyCount": 78,
+      "opponent": {
+        "user": {
+          "id": "11ec948c6817b1a695305e043e020040",
+          "numericId": 15884680,
+          "username": "LeanGiantBunch",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 17,
+          "timeZone": "Australia/Brisbane",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-284.png",
+            "fileName": "kid-284.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 6,
+            "piece": "bishop",
+            "number": 2,
+            "stars": 0
+          },
+          "joinDate": 1645609130,
+          "starsAllTime": 4453
+        },
+        "rating": 1152
+      },
+      "playerColor": 2,
+      "result": "win",
+      "type": "chess",
+      "moves": "gv5Qow!TfoZJks0KlBKCvM3VMx9RxD2MDx6SnDCvmv7ZwE86dy?8cu80bl08ec80vDMDuDRDxDTEDSZShfEpfeSRox65e0R0lr0udlpvyHvlrIlAckumkrAGrymuIZ54xLVNLtNFZK1TKQXQHGutyzFxzItA"
+    },
+    {
+      "id": "11ed470b11e55d88a69f246e96712abc",
+      "category": "fast",
+      "numericId": 58973899521,
+      "fen": "2r2rk1/p3Pqp1/2pQ1n1p/1p6/8/8/PPP3PP/R3R1K1 w - -",
+      "finishDate": 1665236092,
+      "humanGameInfo": {
+        "rating": 1275,
+        "timeControl": 900
+      },
+      "plyCount": 50,
+      "opponent": {
+        "user": {
+          "id": "11ea96b8229a2d1c98de7e3298020040",
+          "numericId": 8725059,
+          "username": "GoodCalmTeam",
+          "realName": null,
+          "membershipLevel": "gold",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 2,
+          "timeZone": "America/New_York",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/Avatar_00017.jpg",
+            "fileName": "Avatar_00017.jpg",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 53,
+            "piece": "king",
+            "number": 31,
+            "stars": 100
+          },
+          "joinDate": 1589552818,
+          "starsAllTime": 8932
+        },
+        "rating": 1180
+      },
+      "playerColor": 2,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0Kgv5QfA9IbsZRlt3Veg!Tcu6SASIuS181nu?9tB1!feKBuBQ0dm7ZCKRKBKT3mA!?KSZ8vK46K1?!sJXHAI0JIJYQJR3TS081"
+    },
+    {
+      "id": "11ed470a25014a8da69f246e96712abc",
+      "category": "fast",
+      "numericId": 58973299619,
+      "fen": "r1b4R/ppppk3/6p1/4P1B1/3P4/P7/BPP3PP/RN4K1 b - -",
+      "finishDate": 1665234810,
+      "humanGameInfo": {
+        "rating": 1269,
+        "timeControl": 900
+      },
+      "plyCount": 51,
+      "opponent": {
+        "user": {
+          "id": "11ed4703779c8adcba04614737020040",
+          "numericId": 17386932,
+          "username": "TartRosyPearl",
+          "realName": null,
+          "membershipLevel": "basic",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 149,
+          "timeZone": "Asia/Bangkok",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-1247.png",
+            "fileName": "kid-1247.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 122,
+            "piece": "pawn",
+            "number": 2,
+            "stars": 0
+          },
+          "joinDate": 1665231573,
+          "starsAllTime": 25
+        },
+        "rating": 927
+      },
+      "playerColor": 1,
+      "result": "win",
+      "type": "chess",
+      "moves": "mC0KfA5QiqQGAi!TgvGQvMTCM1701?CIdN87?1781R87R1781K87nDQKDKISeg2UNvSMv909f9709fMCltCItBICf10813CM3?80cM"
+    },
+    {
+      "id": "11ed47090f0f6c96a69f246e96712abc",
+      "category": "fast",
+      "numericId": 58972699685,
+      "fen": "r1bqk2r/pppp1pbp/6pn/4p3/2B1P3/3P3Q/PPn2PPP/RNB1K1NR w KQkq -",
+      "finishDate": 1665234130,
+      "humanGameInfo": {
+        "rating": 1265,
+        "timeControl": 900
+      },
+      "plyCount": 14,
+      "opponent": {
+        "user": {
+          "id": "11ec07887d27cbb282d75e043e020040",
+          "numericId": 14255052,
+          "username": "Ensw_HoldenH",
+          "realName": null,
+          "membershipLevel": "gold",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 2,
+          "timeZone": "America/Chicago",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-645.png",
+            "fileName": "kid-645.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 1,
+            "piece": "pawn",
+            "number": 1,
+            "stars": 0
+          },
+          "joinDate": 1630104333,
+          "starsAllTime": 7440
+        },
+        "rating": 1171
+      },
+      "playerColor": 2,
+      "result": "win",
+      "type": "chess",
+      "moves": "mu0KdN5QfA!Vlt2UNv92uCQBvxBk"
+    },
+    {
+      "id": "11ed4706ae2835eda69f246e96712abc",
+      "category": "fast",
+      "numericId": 58972099463,
+      "fen": "rnb4k/p2pn3/2p4p/4P3/p3P2B/2P1b3/PP3rPP/RK1q4 w - -",
+      "finishDate": 1665233931,
+      "humanGameInfo": {
+        "rating": 1259,
+        "timeControl": 900
+      },
+      "plyCount": 50,
+      "opponent": {
+        "user": {
+          "id": "11ed171ad8df9154ae625e043e020040",
+          "numericId": 16887178,
+          "username": "AnshT",
+          "realName": null,
+          "membershipLevel": "gold",
+          "accessLevel": "gold",
+          "userType": "kid",
+          "countryId": 225,
+          "timeZone": "America/New_York",
+          "chessTitle": null,
+          "avatar": {
+            "url": "https://www.chesskid.com/images/avatars/kids/100/kid-1043.png",
+            "fileName": "kid-1043.png",
+            "isGold": false,
+            "jsonFile": null
+          },
+          "level": {
+            "id": 3,
+            "piece": "knight",
+            "number": 2,
+            "stars": 0
+          },
+          "joinDate": 1659963959,
+          "starsAllTime": 127
+        },
+        "rating": 635
+      },
+      "playerColor": 2,
+      "result": "win",
+      "type": "chess",
+      "moves": "lB0KBK1TnD9IgvTKDK!0cM8!bsYQmC3VMF2MFw7PsyPGysGPfA!?syPGksXHAtHyvFMFwFGPdEInedPuhfutdctfEdnuck9nkbfd"
+    }
+  ],
+  "hasMore": true
+}
