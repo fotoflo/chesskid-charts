@@ -5,6 +5,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 import RatingContainer from "components/RatingContainer";
+import Link from "next/link";
 
 const Rating: NextPage = (props) => {
   return (
@@ -16,6 +17,7 @@ const Rating: NextPage = (props) => {
       </Head>
 
       <main className={styles.main}>
+        <Link href="/">&lt; back</Link>
         <RatingContainer data={props} />
       </main>
     </div>

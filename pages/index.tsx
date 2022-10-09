@@ -14,13 +14,15 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Chesskid Ratings</h1>
+        <h1 className={styles.title}>Welcome to Chesskid Rating Charts!</h1>
 
         <p className={styles.description}>
-          Get started by pasting your
-          <code className={styles.code}>pages/index.tsx</code>
+          get your rating data from the chesskid api (see the readme file)
+        </p>
+        <p>
+          then check&nbsp;
           <Link href="/rating">
-            <a>Your Rating</a>
+            <a>Your Rating Charts!</a>
           </Link>
         </p>
       </main>
