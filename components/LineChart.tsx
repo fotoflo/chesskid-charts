@@ -1,15 +1,43 @@
 import React from "react";
-import Chart from "chart.js/auto";
+import "chartjs-adapter-date-fns";
 import { Line } from "react-chartjs-2";
-import { CategoryScale } from "chart.js";
+import {
+  Chart as ChartJS,
+  TimeScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Chart } from "react-chartjs-2";
 
-type Props = {
-  chartData: object;
-  config: object;
-};
+ChartJS.register(
+  TimeScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-Chart.register(CategoryScale);
+export default function LineChart({ chartData }: Props) {
+  const options = {
+    response: true,
+    scales: {
+      x: {
+        type: "time",
+        time: {
+          unit: "day",
+        },
+      },
+    },
+  };
 
-export default function LineChart({ chartData, config }: Props) {
-  return <Line data={chartData} config={config} />;
+  console.log("chartData", chartData);
+  console.log("options", options);
+
+  return <Line data={chartData} options={options} />;
 }

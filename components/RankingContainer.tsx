@@ -1,45 +1,39 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Chart as ChartJS, BarElement } from "chart.js";
-
 import LineChart from "./LineChart";
-import "chartjs-adapter-date-fns";
 
-import processRankingData from "components/helpers/processRankingData";
-
-ChartJS.register(BarElement);
+// import processRankingData from "components/helpers/processRankingData";
 
 type Props = {};
 
 const RankingContainer = (props: Props) => {
-  const data = processRankingData(props.data);
+  // const data = processRankingData(props.data);
 
   const sampleData = [
     {
-      id: 1,
-      date: "2019-01-01",
+      date: "2019-12-25",
       userGain: 80000,
-      userLost: 20000,
     },
     {
-      id: 2,
-      date: "2019-01-02",
+      date: "2019-12-26",
       userGain: 100000,
-      userLost: 50000,
     },
     {
-      id: 3,
-      date: "2019-01-03",
+      date: "2019-12-27",
       userGain: 120000,
-      userLost: 100000,
+    },
+    {
+      date: "2020-06-01",
+      userGain: 100000,
+    },
+    {
+      date: "2020-12-27",
+      userGain: 120000,
     },
   ];
 
   const [LineChartData, setLineChartData] = useState({
-    labels: sampleData.map((item) => {
-      item.date;
-    }),
     datasets: [
       {
         label: "User Gain",
@@ -53,30 +47,11 @@ const RankingContainer = (props: Props) => {
     ],
   });
 
-  const config = {
-    type: "line",
-    data: LineChartData,
-    options: {
-      scales: {
-        x: {
-          type: "time",
-          time: {
-            unit: "day",
-          },
-          beginAtZero: true,
-        },
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  };
-
   return (
     <Container>
       <p>ranking data</p>
-      <LineChart chartData={LineChartData} config={config} />
-      <p>{JSON.stringify(data)}</p>
+      <LineChart chartData={LineChartData} />
+      {/* <p>{JSON.stringify(data)}</p> */}
     </Container>
   );
 };
