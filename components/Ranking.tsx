@@ -1,17 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
+import { Chart as ChartJS, BarElement } from "chart.js";
+
+import BarChart from "./BarChart";
+
 import processRankingData from "components/helpers/processRankingData";
+
+ChartJS.register(BarElement);
 
 type Props = {};
 
 const Ranking = (props: Props) => {
   const data = processRankingData(props.data);
 
+  const sampleData = [
+    {
+      id: 1,
+      year: 2019,
+      userGain: 80000,
+      userLost: 20000,
+    },
+    {
+      id: 2,
+      year: 2020,
+      userGain: 100000,
+      userLost: 50000,
+    },
+    {
+      id: 3,
+      year: 2021,
+      userGain: 120000,
+      userLost: 100000,
+    },
+  ];
+
+  const [barChartData, setBarChartData] = useState({
+    labels: sampleData.map((item) => item.year),
+    datasets: [
+      {
+        label: "User Gain",
+        data: sampleData.map((item) => item.userGain),
+      },
+    ],
+  });
+
   return (
     <div>
       <p>ranking data</p>
-      <Data>{JSON.stringify(data)}</Data>
+      {/* <Data>{JSON.stringify(data)}</Data> */}
+      <BarChart chartData={barChartData} />
       <p>ranking data</p>
     </div>
   );
