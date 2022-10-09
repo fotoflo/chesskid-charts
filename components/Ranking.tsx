@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+import processRankingData from "components/helpers/processRankingData";
+
 type Props = {};
 
 const Ranking = (props: Props) => {
+  const data = processRankingData(props.data);
+
   return (
     <div>
       <p>ranking data</p>
-      <Data>{JSON.stringify(props.data)}</Data>
+      <Data>{JSON.stringify(data)}</Data>
       <p>ranking data</p>
     </div>
   );
