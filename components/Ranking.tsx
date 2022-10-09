@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Chart as ChartJS, BarElement } from "chart.js";
 
-import BarChart from "./BarChart";
+import LineChart from "./LineChart";
 
 import processRankingData from "components/helpers/processRankingData";
 
@@ -35,7 +35,7 @@ const Ranking = (props: Props) => {
     },
   ];
 
-  const [barChartData, setBarChartData] = useState({
+  const [LineChartData, setLineChartData] = useState({
     labels: sampleData.map((item) => item.year),
     datasets: [
       {
@@ -49,7 +49,7 @@ const Ranking = (props: Props) => {
     <div>
       <p>ranking data</p>
       {/* <Data>{JSON.stringify(data)}</Data> */}
-      <BarChart chartData={barChartData} />
+      <LineChart chartData={LineChartData} />
       <p>ranking data</p>
     </div>
   );
