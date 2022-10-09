@@ -16,7 +16,6 @@ const Rating: NextPage = (props) => {
       </Head>
 
       <main className={styles.main}>
-        <p className={styles.description}>Your Rating goes here:</p>
         <RatingContainer data={props} />
       </main>
     </div>
@@ -24,7 +23,10 @@ const Rating: NextPage = (props) => {
 };
 
 export async function getStaticProps(context) {
-  const jsonData = await fsPromises.readFile("sampleData/dion.json", "utf8");
+  const jsonData = await fsPromises.readFile(
+    "sampleData/fullData.json",
+    "utf8"
+  );
   const data = JSON.parse(jsonData);
   return {
     props: data, // will be passed to the page component as props

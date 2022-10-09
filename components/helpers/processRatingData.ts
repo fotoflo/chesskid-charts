@@ -24,13 +24,13 @@ const trunkatedSample = {
 
 export default function processRatingData(data: object): RatingData {
   return data.items
-    .filter((item) => !!item.humanGameInfo)
+    .filter((item) => item.category === "fast")
     .map((item: any) => {
       return {
         category: item.category,
         finishDate: new Date(parseInt(item.finishDate * 1000)),
-        timeControl: item?.humanGameInfo?.timeControl ?? 0,
-        rating: item?.humanGameInfo?.rating ?? 0,
+        timeControl: item.humanGameInfo.timeControl ?? 0,
+        rating: item.humanGameInfo.rating ?? 0,
         playerColor: item.playerColor,
         result: item.result,
         opponentRating: item.opponent.rating,

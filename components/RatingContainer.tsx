@@ -3,17 +3,17 @@ import styled from "styled-components";
 
 import LineChart from "./LineChart";
 
-import processRankingData from "components/helpers/processRankingData";
+import processRatingData from "components/helpers/processRatingData";
 
 type Props = {};
 
-const RaitingContainer = (props: Props) => {
-  const data = processRankingData(props.data);
+const RatingContainer = (props: Props) => {
+  const data = processRatingData(props.data);
 
   const [LineChartData, setLineChartData] = useState({
     datasets: [
       {
-        label: "User Gain",
+        label: "rating",
         data: data.map((item) => {
           return {
             x: item.finishDate.toISOString().split("T")[0],
@@ -42,4 +42,4 @@ const Container = styled("div")`
   word-wrap: break-word;
 `;
 
-export default RaitingContainer;
+export default RatingContainer;
