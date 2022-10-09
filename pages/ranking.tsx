@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
-import Ranking from "components/Ranking";
+import RankingContainer from "components/RankingContainer";
 
 const Home: NextPage = (props) => {
   return (
@@ -17,7 +17,7 @@ const Home: NextPage = (props) => {
 
       <main className={styles.main}>
         <p className={styles.description}>Your ranking goes here:</p>
-        <Ranking data={props} />
+        <RankingContainer data={props} />
       </main>
     </div>
   );

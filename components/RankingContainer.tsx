@@ -12,7 +12,7 @@ ChartJS.register(BarElement);
 
 type Props = {};
 
-const Ranking = (props: Props) => {
+const RankingContainer = (props: Props) => {
   const data = processRankingData(props.data);
 
   const sampleData = [
@@ -89,4 +89,4 @@ const Container = styled("div")`
   word-wrap: break-word;
 `;
 
-export default Ranking;
+export default RankingContainer;
