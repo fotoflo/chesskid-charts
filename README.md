@@ -11,4 +11,4 @@ How to use it:
 1. clone the repository
 2. cd into the directory and type `npm install`
 3. run `npm run dev`
-4. open your browser to https://localhost:3000
+4. open your browser to https://localhost:3000/rating
