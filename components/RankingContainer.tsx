@@ -13,23 +13,27 @@ const RankingContainer = (props: Props) => {
   const sampleData = [
     {
       date: "2019-12-25",
-      userGain: 80000,
+      userGain: 80,
     },
     {
       date: "2019-12-26",
-      userGain: 100000,
+      userGain: 100,
     },
     {
       date: "2019-12-27",
-      userGain: 120000,
+      userGain: 120,
     },
     {
-      date: "2020-06-01",
-      userGain: 100000,
+      date: "2019-12-27",
+      userGain: 100,
     },
     {
-      date: "2020-12-27",
-      userGain: 120000,
+      date: "2019-12-27",
+      userGain: 70,
+    },
+    {
+      date: "2019-12-30",
+      userGain: 100,
     },
   ];
 

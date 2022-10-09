@@ -1,15 +1,37 @@
 type RankingData = {
-  datasets: DataSet[];
-};
+  category: "fast";
+  finishDate: number;
+  timeControl: number;
+  rating: number;
+  playerColor: 1 | 2;
+  result: "win" | "loss" | "draw";
+  opponentRating: number;
+}[];
 
-type DataSet = {
-  label: string;
-  data: number[];
-  backgroundColor: string;
-  borderColor: string;
-  borderWidth: number;
+const trunkatedSample = {
+  category: "fast",
+  finishDate: 1665273425,
+  humanGameInfo: {
+    rating: 1295,
+    timeControl: 900,
+  },
+  opponent: {
+    rating: 1310,
+  },
+  playerColor: 2,
+  result: "win",
 };
 
 export default function processRankingData(data: object): RankingData {
-  return data.items[0];
+  return data.items.map((item: any) => {
+    return {
+      category: item.category,
+      finishDate: new Date(parseInt(item.finishDate * 1000)),
+      timeControl: item.humanGameInfo.timeControl,
+      rating: item.humanGameInfo.rating,
+      playerColor: item.playerColor,
+      result: item.result,
+      opponentRating: item.opponent.rating,
+    };
+  });
 }
