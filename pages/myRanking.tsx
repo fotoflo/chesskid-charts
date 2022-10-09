@@ -29,9 +29,7 @@ export async function getStaticProps(context) {
     "sampleData/shortSample.json",
     "utf8"
   );
-  const data = { hello: "world" };
-
-  // JSON.parse(jsonData);
+  const data = JSON.parse(jsonData);
   return {
     props: data, // will be passed to the page component as props
   };
