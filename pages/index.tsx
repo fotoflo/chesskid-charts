@@ -14,13 +14,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Chesskid Rankings</h1>
+        <h1 className={styles.title}>Welcome to Chesskid Ratings</h1>
 
         <p className={styles.description}>
           Get started by pasting your
           <code className={styles.code}>pages/index.tsx</code>
-          <Link href="/myRanking">
-            <a>Your Ranking</a>
+          <Link href="/rating">
+            <a>Your Rating</a>
           </Link>
         </p>
       </main>

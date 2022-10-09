@@ -1,4 +1,4 @@
-type RankingData = {
+export type RatingData = {
   category: "fast";
   finishDate: number;
   timeControl: number;
@@ -22,16 +22,18 @@ const trunkatedSample = {
   result: "win",
 };
 
-export default function processRankingData(data: object): RankingData {
-  return data.items.map((item: any) => {
-    return {
-      category: item.category,
-      finishDate: new Date(parseInt(item.finishDate * 1000)),
-      timeControl: item.humanGameInfo.timeControl,
-      rating: item.humanGameInfo.rating,
-      playerColor: item.playerColor,
-      result: item.result,
-      opponentRating: item.opponent.rating,
-    };
-  });
+export default function processRatingData(data: object): RatingData {
+  return data.items
+    .filter((item) => !!item.humanGameInfo)
+    .map((item: any) => {
+      return {
+        category: item.category,
+        finishDate: new Date(parseInt(item.finishDate * 1000)),
+        timeControl: item?.humanGameInfo?.timeControl ?? 0,
+        rating: item?.humanGameInfo?.rating ?? 0,
+        playerColor: item.playerColor,
+        result: item.result,
+        opponentRating: item.opponent.rating,
+      };
+    });
 }

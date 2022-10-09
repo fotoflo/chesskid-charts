@@ -25,8 +25,5 @@ export default function LineChart({ chartData }: Props) {
     },
   };
 
-  console.log("chartData", chartData);
-  console.log("options", options);
-
   return <Line data={chartData} options={options} />;
 }

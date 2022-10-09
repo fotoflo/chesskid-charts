@@ -1,21 +1,12 @@
-import processRankingData from "../processRankingData";
+import processRatingData from "../processRatingData";
 import fs from "fs";
 
 const jsonData = fs.readFileSync("sampleData/shortSample.json", "utf8");
 const data = JSON.parse(jsonData);
 
-type RankingData = {
-  category: "fast";
-  finishDate: number;
-  timeControl: number;
-  rating: number;
-  playerColor: 1 | 2;
-  result: "win" | "loss" | "draw";
-}[];
-
-describe("processRankingData", () => {
+describe("processRatingData", () => {
   it("should return flat data for the charts", () => {
-    const result = processRankingData(data);
+    const result = processRatingData(data);
 
     expect(typeof result[0]).toBe("object");
     expect(result[0].category).toBe("fast");
