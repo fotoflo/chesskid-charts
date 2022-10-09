@@ -1,3 +1,3 @@
 export default function processRankingData(data: object): string {
-  return "hello world";
+  return data.items[0];
 }
