@@ -1,3 +1,5 @@
+import fsPromises from "fs/promises";
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -5,7 +7,7 @@ import styles from "../styles/Home.module.css";
 
 import Ranking from "components/Ranking";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -16,10 +18,23 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <p className={styles.description}>Your ranking goes here:</p>
-        <Ranking />
+        <Ranking data={props} />
       </main>
     </div>
   );
 };
+
+export async function getStaticProps(context) {
+  const jsonData = await fsPromises.readFile(
+    "sampleData/shortSample.json",
+    "utf8"
+  );
+  const data = { hello: "world" };
+
+  // JSON.parse(jsonData);
+  return {
+    props: data, // will be passed to the page component as props
+  };
+}
 
 export default Home;
