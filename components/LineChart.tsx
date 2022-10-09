@@ -7,21 +7,10 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Title,
-  Tooltip,
-  Legend,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 
-ChartJS.register(
-  TimeScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(TimeScale, LinearScale, PointElement, LineElement);
 
 export default function LineChart({ chartData }: Props) {
   const options = {

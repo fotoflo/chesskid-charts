@@ -57,7 +57,7 @@ const RankingContainer = (props: Props) => {
 };
 
 const Container = styled("div")`
-  max-width: 700px;
+  width: 700px;
   // center the content
   margin: 0 auto;
   padding: 1em;
