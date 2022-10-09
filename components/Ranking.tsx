@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Chart as ChartJS, BarElement } from "chart.js";
 
 import LineChart from "./LineChart";
+import "chartjs-adapter-date-fns";
 
 import processRankingData from "components/helpers/processRankingData";
 
@@ -17,45 +18,70 @@ const Ranking = (props: Props) => {
   const sampleData = [
     {
       id: 1,
-      year: 2019,
+      date: "2019-01-01",
       userGain: 80000,
       userLost: 20000,
     },
     {
       id: 2,
-      year: 2020,
+      date: "2019-01-02",
       userGain: 100000,
       userLost: 50000,
     },
     {
       id: 3,
-      year: 2021,
+      date: "2019-01-03",
       userGain: 120000,
       userLost: 100000,
     },
   ];
 
   const [LineChartData, setLineChartData] = useState({
-    labels: sampleData.map((item) => item.year),
+    labels: sampleData.map((item) => {
+      item.date;
+    }),
     datasets: [
       {
         label: "User Gain",
-        data: sampleData.map((item) => item.userGain),
+        data: sampleData.map((item) => {
+          return {
+            x: item.date,
+            y: item.userGain,
+          };
+        }),
       },
     ],
   });
 
+  const config = {
+    type: "line",
+    data: LineChartData,
+    options: {
+      scales: {
+        x: {
+          type: "time",
+          time: {
+            unit: "day",
+          },
+          beginAtZero: true,
+        },
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+
   return (
-    <div>
+    <Container>
       <p>ranking data</p>
-      {/* <Data>{JSON.stringify(data)}</Data> */}
-      <LineChart chartData={LineChartData} />
-      <p>ranking data</p>
-    </div>
+      <LineChart chartData={LineChartData} config={config} />
+      <p>{JSON.stringify(data)}</p>
+    </Container>
   );
 };
 
-const Data = styled("p")`
+const Container = styled("div")`
   max-width: 700px;
   // center the content
   margin: 0 auto;

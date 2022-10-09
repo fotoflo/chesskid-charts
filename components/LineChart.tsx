@@ -5,10 +5,11 @@ import { CategoryScale } from "chart.js";
 
 type Props = {
   chartData: object;
+  config: object;
 };
 
 Chart.register(CategoryScale);
 
-export default function LineChart({ chartData }: Props) {
-  return <Line data={chartData} />;
+export default function LineChart({ chartData, config }: Props) {
+  return <Line data={chartData} config={config} />;
 }
