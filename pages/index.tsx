@@ -1,4 +1,5 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,10 @@ import styles from "../styles/Home.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "../components/NavBar";
 
-const Home: NextPage = ({ themeToggler, session }) => {
+import { ServersideSessionHandler } from "lib/middleware";
+import { Session } from "next-auth";
+
+const Home: NextPage<{ data: Session }> = ({ themeToggler, data: session }) => {
   return (
     <>
       <NavBar themeToggler={themeToggler} session={session} />
@@ -20,7 +24,8 @@ const Home: NextPage = ({ themeToggler, session }) => {
         </Head>
 
         <main className={styles.main}>
-          <GoogleLoginButton />
+          {session && <h1>Logged In</h1>}
+          {!session && <GoogleLoginButton />}
 
           <h1 className={styles.title}>Welcome to Chesskid Rating Charts!</h1>
 
@@ -58,3 +63,7 @@ const Home: NextPage = ({ themeToggler, session }) => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return ServersideSessionHandler(context);
+};

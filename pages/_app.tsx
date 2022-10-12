@@ -1,4 +1,7 @@
 import "../styles/globals.css";
+
+import { SSRProvider } from "@react-aria/ssr";
+
 import type { AppProps } from "next/app";
 
 import { ThemeProvider } from "styled-components";
@@ -7,7 +10,7 @@ import useLocalStorage from "hooks/useLocalStorage";
 
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [theme, setTheme] = useLocalStorage("theme", DEFAULT_THEME);
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -16,9 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <GlobalStyles theme={theme == "light" ? lightTheme : darkTheme} />
-      <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
-        <Component {...pageProps} theme={theme} themeToggler={themeToggler} />
-      </ThemeProvider>
+      <SSRProvider>
+        <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
+          <Component {...pageProps} theme={theme} themeToggler={themeToggler} />
+        </ThemeProvider>
+      </SSRProvider>
     </>
   );
 }
