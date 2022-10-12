@@ -6,14 +6,14 @@ export const ServersideSessionHandler: GetServerSideProps = async (context) => {
   //   ? await getTodoRefs((session?.user?.email as string) ?? "")
   //   : [];
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/",
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  }
 
   return {
     props: {
