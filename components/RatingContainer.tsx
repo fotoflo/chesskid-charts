@@ -28,7 +28,7 @@ const RatingContainer = (props: Props) => {
 
   return (
     <Container>
-      <p>Rating data</p>
+      <p>Rating data from {LineChartData.datasets[0].data.length} games</p>
       <LineChart chartData={LineChartData} />
     </Container>
   );
