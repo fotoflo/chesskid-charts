@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 import { Session } from "next-auth-custom/types";
-import { Col, Nav, Navbar } from "react-bootstrap";
+import { Col, Navbar } from "react-bootstrap";
 
 import Avatar from "components/auth/Avatar";
 import SignOutButton from "components/auth/SignOutButton";

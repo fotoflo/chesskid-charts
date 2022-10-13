@@ -7,9 +7,12 @@ import RatingContainer from "components/RatingContainer";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import { ServersideSessionHandler } from "lib/middleware";
+import { useSession } from "next-auth/react";
+import NavBar from "../components/NavBar";
 
-const Rating: NextPage = ({ user, data }) => {
-  console.log({ user, data });
+const Rating: NextPage = ({ data, auth }) => {
+  const { data: session, status } = useSession();
+  console.log("data", { session, status });
   return (
     <>
       <Head>
@@ -18,7 +21,9 @@ const Rating: NextPage = ({ user, data }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <p>auth: {JSON.stringify(auth)}</p>
       <Container>
+        <NavBar session={session} />
         <Link href="/">&lt; back</Link>
         <RatingContainer data={data} />
       </Container>
@@ -35,7 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let session = await ServersideSessionHandler(context);
   console.log({ session });
   const props = {
-    user: session.props.data,
     data,
   };
 

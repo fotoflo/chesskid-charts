@@ -8,6 +8,8 @@ import { ThemeProvider } from "styled-components";
 import { darkTheme, GlobalStyles, lightTheme } from "components/themes/Themes";
 import useLocalStorage from "hooks/useLocalStorage";
 
+import { SessionProvider, useSession } from "next-auth/react";
+
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
@@ -20,12 +22,41 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <>
       <GlobalStyles theme={theme == "light" ? lightTheme : darkTheme} />
       <SSRProvider>
-        <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
-          <Component {...pageProps} theme={theme} themeToggler={themeToggler} />
-        </ThemeProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
+            {Component.auth ? (
+              <Auth>
+                <Component
+                  {...pageProps}
+                  auth={true}
+                  theme={theme}
+                  themeToggler={themeToggler}
+                />
+              </Auth>
+            ) : (
+              <Component
+                {...pageProps}
+                auth={false}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            )}
+          </ThemeProvider>
+        </SessionProvider>
       </SSRProvider>
     </>
   );
+}
+
+function Auth({ children }) {
+  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+  const { status } = useSession({ required: true });
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  return children;
 }
 
 export default MyApp;
