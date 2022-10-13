@@ -11,9 +11,12 @@ import useLocalStorage from "hooks/useLocalStorage";
 import { SessionProvider, useSession } from "next-auth/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import type { AppType } from "next/app";
+import { trpc } from "../utils/trpc";
+
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   const [theme, setTheme] = useLocalStorage("theme", DEFAULT_THEME);
   const themeToggler = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -60,4 +63,4 @@ function Auth({ children }) {
   return children;
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

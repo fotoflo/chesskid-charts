@@ -10,14 +10,24 @@ import { ServersideSessionHandler } from "lib/middleware";
 import { useSession } from "next-auth/react";
 import NavBar from "../components/NavBar";
 
-const Rating: NextPage = ({ data, auth }) => {
+import { trpc } from "../utils/trpc";
+import Loading from "../components/Loading";
+
+const Rating: NextPage = ({ data, auth, ...props }) => {
   const { data: session, status } = useSession();
   console.log("data", { session, status });
+
+  const hello = trpc.hello.useQuery({ text: "client" });
+  if (!hello.data) {
+    return <Loading />;
+  }
+
   return (
     <>
       <NavBar session={session} />
       <Container>
-        <Link href="/">&lt; back</Link>
+        <p>{hello.data.greeting}</p>
+        <Link href="/home">&lt; back</Link>
         <RatingContainer data={data} />
       </Container>
     </>
