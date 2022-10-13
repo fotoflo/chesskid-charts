@@ -13,7 +13,7 @@ import NavBar from "../components/NavBar";
 import { trpc } from "../utils/trpc";
 import Loading from "../components/Loading";
 
-const Rating: NextPage = ({ data, auth, ...props }) => {
+const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
   const { data: session, status } = useSession();
   console.log("data", { session, status });
 
@@ -24,7 +24,7 @@ const Rating: NextPage = ({ data, auth, ...props }) => {
 
   return (
     <>
-      <NavBar session={session} />
+      <NavBar session={session} themeToggler={themeToggler} />
       <Container>
         <p>{hello.data.greeting}</p>
         <Link href="/home">&lt; back</Link>

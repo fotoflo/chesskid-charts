@@ -16,11 +16,13 @@ import { trpc } from "../utils/trpc";
 
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
-const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-  const [theme, setTheme] = useLocalStorage("theme", DEFAULT_THEME);
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
+import { useTheme } from "../components/themes/Themes";
+
+const MyApp: AppType = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
+  const [theme, themeToggler] = useTheme();
 
   return (
     <>
@@ -50,7 +52,7 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }: App
       </SSRProvider>
     </>
   );
-}
+};
 
 function Auth({ children }) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
