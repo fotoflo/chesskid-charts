@@ -1,5 +1,23 @@
+import React from "react";
 import { createGlobalStyle } from "styled-components";
 // from https://www.youtube.com/watch?v=G00V4tRx1ME
+
+import useLocalStorage from "hooks/useLocalStorage";
+const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
+
+export const useTheme = () => {
+  const [theme, setTheme]: [string, Function] = useLocalStorage(
+    "theme",
+    DEFAULT_THEME
+  );
+
+  const themeToggler = () => {
+    console.log(`toggler, ${theme}`); // firing on click
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
+  return [theme, themeToggler];
+};
 
 export const lightTheme = {
   themeName: "light",

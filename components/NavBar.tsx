@@ -10,22 +10,18 @@ import SignOutButton from "components/auth/SignOutButton";
 import GoogleLoginButton from "components/auth/GoogleLoginButton";
 import ThemeToggleSwitch from "components/themes/ThemeToggleSwitch";
 
-import { Theme } from "types/themes";
+import { useSession } from "next-auth/react";
 
-function NavBar({
-  session,
-  themeToggler,
-}: {
-  session: Session;
-  themeToggler: Theme["themeToggler"];
-}) {
+function NavBar() {
+  const { data: session, status } = useSession();
+
   return (
     <StyledNavbar className="mb-0">
       <Col md={2}>
         <h1>ChessKid Charts</h1>
       </Col>
       <Col md={7}></Col>
-      <ThemeToggleSwitch themeToggler={themeToggler} />
+      <ThemeToggleSwitch />
       <Col className="my-auto" md={1}>
         {session && <SignOutButton />}
       </Col>

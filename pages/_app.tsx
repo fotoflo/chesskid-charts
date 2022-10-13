@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 
 import { SSRProvider } from "@react-aria/ssr";
@@ -5,19 +6,19 @@ import { SSRProvider } from "@react-aria/ssr";
 import type { AppProps } from "next/app";
 
 import { ThemeProvider } from "styled-components";
-import { darkTheme, GlobalStyles, lightTheme } from "components/themes/Themes";
-import useLocalStorage from "hooks/useLocalStorage";
+import {
+  darkTheme,
+  GlobalStyles,
+  lightTheme,
+  useTheme,
+} from "components/themes/Themes";
 
 import { SessionProvider, useSession } from "next-auth/react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const [theme, setTheme] = useLocalStorage("theme", DEFAULT_THEME);
-  const themeToggler = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light");
-  };
+  const [theme] = useTheme();
+
+  console.log("_app theme", theme);
 
   return (
     <>
@@ -27,20 +28,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
             {Component.auth ? (
               <Auth>
-                <Component
-                  {...pageProps}
-                  auth={true}
-                  theme={theme}
-                  themeToggler={themeToggler}
-                />
+                <Component {...pageProps} auth={true} theme={theme} />
               </Auth>
             ) : (
-              <Component
-                {...pageProps}
-                auth={false}
-                theme={theme}
-                themeToggler={themeToggler}
-              />
+              <Component {...pageProps} auth={false} theme={theme} />
             )}
           </ThemeProvider>
         </SessionProvider>

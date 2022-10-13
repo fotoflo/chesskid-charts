@@ -10,10 +10,10 @@ import NavBar from "../components/NavBar";
 import { ServersideSessionHandler } from "lib/middleware";
 import { Session } from "next-auth";
 
-const Home: NextPage<{ data: Session }> = ({ themeToggler, data: session }) => {
+const Home: NextPage<{ data: Session }> = ({ data: session }) => {
   return (
     <>
-      <NavBar themeToggler={themeToggler} session={session} />
+      <NavBar />
 
       <div className={styles.container}>
         <Head>

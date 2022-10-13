@@ -15,7 +15,7 @@ const Rating: NextPage = ({ data, auth }) => {
   console.log("data", { session, status });
   return (
     <>
-      <NavBar session={session} />
+      <NavBar />
       <Container>
         <Link href="/">&lt; back</Link>
         <RatingContainer data={data} />

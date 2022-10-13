@@ -3,11 +3,15 @@ import { ThemeContext } from "styled-components";
 import styled from "styled-components";
 import { lightTheme, darkTheme } from "components/themes/Themes";
 
+import { useTheme } from "components/themes/Themes";
+
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
-function ThemeToggleSwitch({ themeToggler, ...props }) {
+function ThemeToggleSwitch({ ...props }) {
   //consume the theme context
   const themeContext = useContext(ThemeContext);
+  const [theme, themeToggler] = useTheme();
+
   const [checked, setChecked] = useState(
     themeContext.themeName !== DEFAULT_THEME
   );
