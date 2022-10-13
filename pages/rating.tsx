@@ -15,15 +15,8 @@ const Rating: NextPage = ({ data, auth }) => {
   console.log("data", { session, status });
   return (
     <>
-      <Head>
-        <title>Your Ratings</title>
-        <meta name="description" content="ChessKid Ratings Analyser" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <p>auth: {JSON.stringify(auth)}</p>
+      <NavBar session={session} />
       <Container>
-        <NavBar session={session} />
         <Link href="/">&lt; back</Link>
         <RatingContainer data={data} />
       </Container>

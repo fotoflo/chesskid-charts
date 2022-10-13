@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import GoogleLoginButton from "../components/auth/GoogleLoginButton";
 import styles from "../styles/Home.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "../components/NavBar";
 
 import { ServersideSessionHandler } from "lib/middleware";

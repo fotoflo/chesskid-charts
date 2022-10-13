@@ -9,6 +9,7 @@ import { darkTheme, GlobalStyles, lightTheme } from "components/themes/Themes";
 import useLocalStorage from "hooks/useLocalStorage";
 
 import { SessionProvider, useSession } from "next-auth/react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const DEFAULT_THEME = process.env.REACT_APP_DEFAULT_THEME;
 
