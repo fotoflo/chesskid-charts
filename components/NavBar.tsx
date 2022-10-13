@@ -20,11 +20,11 @@ function NavBar({
   themeToggler: Theme["themeToggler"];
 }) {
   return (
-    <StyledNavbar>
+    <StyledNavbar className="mb-0">
       <Col md={2}>
         <h1>ChessKid Charts</h1>
       </Col>
-      <Col md={8}></Col>
+      <Col md={7}></Col>
       <ThemeToggleSwitch themeToggler={themeToggler} />
       <Col className="my-auto" md={1}>
         {session && <SignOutButton />}
