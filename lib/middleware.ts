@@ -6,11 +6,13 @@ export const ServersideSessionHandler: GetServerSideProps = async (context) => {
   //   ? await getTodoRefs((session?.user?.email as string) ?? "")
   //   : [];
 
-  if (!session) {
+  console.log("SESSION", session);
+
+  if (session && context.resolvedUrl === "/home") {
     return {
       redirect: {
         permanent: false,
-        destination: "/home",
+        destination: "/rating",
       },
     };
   }

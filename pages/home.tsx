@@ -40,21 +40,7 @@ const Home: NextPage<{ data: Session }> = ({ themeToggler, data: session }) => {
         </main>
 
         <footer className={styles.footer}>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{" "}
-            <span className={styles.logo}>
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                width={72}
-                height={16}
-              />
-            </span>
-          </a>
+          Powered by <span>♥</span>
         </footer>
       </div>
     </>
@@ -64,5 +50,5 @@ const Home: NextPage<{ data: Session }> = ({ themeToggler, data: session }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  return ServersideSessionHandler(context);
+  return ServersideSessionHandler(context); // dont do this from /home otherwise we get infinite loop
 };
