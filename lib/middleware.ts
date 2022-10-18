@@ -1,10 +1,8 @@
 import { getSession } from "next-auth/react";
 
-import { NextPageContext } from "next";
+import { NextPageContext, GetServerSideProps } from "next";
 
-export const ServersideSessionHandler: GetServerSideProps = async (
-  context: NextPageContext
-) => {
+export const ServersideSessionHandler = async (context: NextPageContext) => {
   const session = await getSession(context);
   // const todoRefs = session
   //   ? await getTodoRefs((session?.user?.email as string) ?? "")
@@ -25,6 +23,7 @@ export const ServersideSessionHandler: GetServerSideProps = async (
   return {
     props: {
       data: session,
+      context,
     },
   };
 };
