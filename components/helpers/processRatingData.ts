@@ -22,7 +22,11 @@ const trunkatedSample = {
   result: "win",
 };
 
-export default function processRatingData(data: object): RatingData {
+export default function processRatingData(
+  data: object,
+  startDate: Date,
+  endDate: Date
+): RatingData {
   return data.items
     .filter((item) => item.category === "fast")
     .map((item: any) => {

@@ -17,7 +17,32 @@ const RatingContainer = ({ data }) => {
   if (!data) {
     return <Loading />;
   }
-  const ratingData = processRatingData(data);
+
+  const initialDateState = {
+    startDate: new Date(new Date().setHours(0, 0, 0, 0)),
+    endDate: new Date(new Date().setHours(0, 0, 0, 0)),
+    focusedInput: null,
+  };
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case "focusChange":
+        return { ...state, focusedInput: action.payload };
+      case "dateChange":
+        console.log("payload", action.payload);
+        return action.payload;
+      default:
+        throw new Error();
+    }
+  }
+
+  const [dateState, dispatch] = useReducer(reducer, initialDateState);
+
+  const ratingData = processRatingData(
+    data,
+    dateState.startDate,
+    dateState.endDate
+  );
 
   const [LineChartData, setLineChartData] = useState({
     datasets: [
@@ -35,29 +60,6 @@ const RatingContainer = ({ data }) => {
 
   console.log("final data", LineChartData);
 
-  const onDatesChange = (data) => {
-    console.log("dates changed!", data);
-  };
-
-  const initialDateState = {
-    startDate: new Date(new Date().setHours(0, 0, 0, 0)),
-    endDate: new Date(new Date().setHours(0, 0, 0, 0)),
-    focusedInput: null,
-  };
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case "focusChange":
-        return { ...state, focusedInput: action.payload };
-      case "dateChange":
-        return action.payload;
-      default:
-        throw new Error();
-    }
-  }
-
-  const [dateState, dispatch] = useReducer(reducer, initialDateState);
-
   return (
     <Container>
       <p>Rating data from {LineChartData.datasets[0].data.length} games</p>
@@ -74,8 +76,8 @@ const RatingContainer = ({ data }) => {
         focusedInput={dateState.focusedInput} // START_DATE, END_DATE or null
       />
 
-      {/* <p>start: {JSON.stringify(dateState.startDate)}</p>
-      <p>end: {JSON.stringify(dateState.endDate)}</p> */}
+      <p>start: {JSON.stringify(dateState.startDate)}</p>
+      <p>end: {JSON.stringify(dateState.endDate)}</p>
       <LineChart chartData={LineChartData} />
     </Container>
   );
