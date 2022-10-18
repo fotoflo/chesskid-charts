@@ -17,7 +17,7 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
   const { data: session, status } = useSession();
   console.log("data", { session, status });
 
-  const hello = trpc.hello.useQuery({ text: "client" });
+  const hello = trpc.hello.useQuery({ text: "trpc client" });
   if (!hello.data) {
     return <Loading />;
   }

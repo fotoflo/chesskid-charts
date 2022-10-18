@@ -1,14 +1,19 @@
 import { getSession } from "next-auth/react";
 
-export const ServersideSessionHandler: GetServerSideProps = async (context) => {
+import { NextPageContext } from "next";
+
+export const ServersideSessionHandler: GetServerSideProps = async (
+  context: NextPageContext
+) => {
   const session = await getSession(context);
   // const todoRefs = session
   //   ? await getTodoRefs((session?.user?.email as string) ?? "")
   //   : [];
 
-  console.log("SESSION", session);
+  // console.log("SESSION", session);
+  console.log("CONTEXT", context.req.url);
 
-  if (session && context.resolvedUrl === "/home") {
+  if (session) {
     return {
       redirect: {
         permanent: false,
