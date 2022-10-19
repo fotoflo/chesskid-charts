@@ -57,9 +57,6 @@ const RatingContainer = ({ fullData }) => {
 
   return (
     <Container>
-      <p>Line Chart data from {state.lineChartData.datasets[0].data.length} </p>
-      <p> Props data from {fullData.items.length} games</p>
-
       <DateRangeInput
         onDatesChange={(dateData) =>
           dispatch({ type: "dateChange", payload: dateData })
@@ -72,8 +69,6 @@ const RatingContainer = ({ fullData }) => {
         focusedInput={state.focusedInput} // START_DATE, END_DATE or null
       />
 
-      <p>start: {JSON.stringify(state.startDate)}</p>
-      <p>end: {JSON.stringify(state.endDate)}</p>
       <br />
       <Row>
         <Col md="2">
