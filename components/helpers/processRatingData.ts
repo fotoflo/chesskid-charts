@@ -1,6 +1,6 @@
 export type RatingData = {
   category: "fast";
-  finishDate: number;
+  finishDate: number | Date;
   timeControl: number;
   rating: number;
   playerColor: 1 | 2;
@@ -22,17 +22,39 @@ const trunkatedSample = {
   result: "win",
 };
 
-export default function processRatingData(
-  data: object,
-  startDate: Date,
-  endDate: Date
-): RatingData {
+type InputData = {
+  items: {
+    category: "fast";
+    finishDate: number | string | Date;
+    humanGameInfo: {
+      rating: number;
+      timeControl: number;
+    };
+    opponent: {
+      rating: number;
+    };
+    playerColor: 1 | 2;
+    result: "win" | "loss" | "draw";
+  }[];
+};
+
+export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
+  // filter the items by date
+  data.items = data.items.filter((item) => {
+    const finishDate = new Date(item.finishDate * 1000).setHours(0, 0, 0, 0);
+    return finishDate >= startDate && finishDate <= endDate;
+  });
+
+  return data;
+}
+
+export default function processRatingData(data: InputData): RatingData {
   return data.items
     .filter((item) => item.category === "fast")
     .map((item: any) => {
       return {
         category: item.category,
-        finishDate: new Date(parseInt(item.finishDate * 1000)),
+        finishDate: new Date(item.finishDate * 1000),
         timeControl: item.humanGameInfo.timeControl ?? 0,
         rating: item.humanGameInfo.rating ?? 0,
         playerColor: item.playerColor,

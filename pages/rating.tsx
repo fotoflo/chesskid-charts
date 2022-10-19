@@ -38,7 +38,7 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const jsonData = await fsPromises.readFile(
-    "sampleData/fullData.json",
+    "sampleData/shortSample.json", // fullData.json or shortSample.json
     "utf8"
   );
   const data = JSON.parse(jsonData);
