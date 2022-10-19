@@ -1,3 +1,5 @@
+import { FaWindows } from "react-icons/fa";
+
 export type RatingData = {
   category: "fast";
   finishDate: number | Date;
@@ -54,6 +56,38 @@ export function composeLineChartData(ratingData: RatingData) {
   };
 }
 
+export function composePieChartData(ratingData: RatingData) {
+  let wins = 0;
+  let losses = 0;
+  let draws = 0;
+
+  ratingData.forEach((item) => {
+    if (item.result === "win") {
+      wins++;
+    } else if (item.result === "loss") {
+      losses++;
+    } else {
+      draws++;
+    }
+  });
+
+  return {
+    labels: ["Wins", "Losses", "Draws"],
+    datasets: [
+      {
+        label: "Win/Lose/Draw",
+        data: [wins, losses, draws],
+        backgroundColor: [
+          "rgb(54, 235, 90)",
+          "rgb(255, 86, 86)",
+          "rgba(184, 184, 184, 0.155)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+}
+
 export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   // filter the items by date
   data.items = data.items.filter((item) => {
@@ -65,6 +99,8 @@ export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
 }
 
 export function flattenRatingData(data: InputData): RatingData {
+  console.log(data);
+
   return data.items
     .filter((item) => item.category === "fast")
     .map((item: any) => {
@@ -87,5 +123,8 @@ export function processRatingData(
 ) {
   const filteredData = filterByDate(data, startDate, endDate);
   const ratingData = flattenRatingData(filteredData);
-  return { lineChartData: composeLineChartData(ratingData) };
+  return {
+    lineChartData: composeLineChartData(ratingData),
+    pieChartData: composePieChartData(ratingData),
+  };
 }

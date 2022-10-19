@@ -3,6 +3,7 @@ import {
   filterByDate,
   composeLineChartData,
   processRatingData,
+  composePieChartData,
 } from "../processRatingData";
 import fs from "fs";
 
@@ -58,7 +59,7 @@ describe("flattenRatingData(dataWithItemsArray)", () => {
 });
 
 describe("composeLineChartData", () => {
-  it("should return data in the format expected by the chart", () => {
+  it("should return data in the format expected by the Line chart", () => {
     const ratingData = flattenRatingData(data);
     const result = composeLineChartData(ratingData);
 
@@ -67,6 +68,19 @@ describe("composeLineChartData", () => {
     expect(result.datasets[0].data.length).toBe(10);
     expect(result.datasets[0].data[0].x).toBe("2022-10-09");
     expect(result.datasets[0].data[0].y).toBe(1302);
+  });
+});
+
+describe("composePieChartData(ratingData)", () => {
+  it("should return data in the format expected by the Pie chart", () => {
+    const ratingData = flattenRatingData(data);
+    const result = composePieChartData(ratingData);
+
+    expect(typeof result).toBe("object");
+    expect(result.labels.length).toBe(3);
+    expect(result.labels[0]).toBe("Wins");
+    expect(result.labels[1]).toBe("Losses");
+    expect(result.labels[2]).toBe("Draws");
   });
 });
 
@@ -82,5 +96,7 @@ describe("processRatingData(data,startDate,endDate)", () => {
     expect(result.lineChartData.datasets[0].data.length).toBe(10);
     expect(result.lineChartData.datasets[0].data[0].x).toBe("2022-10-09");
     expect(result.lineChartData.datasets[0].data[0].y).toBe(1302);
+
+    expect(result.pieChartData).toBeDefined();
   });
 });
