@@ -11,53 +11,42 @@ import { PieChart } from "./PieChart";
 
 type Props = {};
 
-const RatingContainer = (props) => {
-  if (!props.fullData) {
+const RatingContainer = ({ fullData }) => {
+  if (!fullData) {
     return <Loading />;
   }
 
+  console.log("full data length", fullData.items.length);
+
   const initialStartDate = new Date(
-    new Date("2022-09-25").setHours(0, 0, 0, 0)
+    new Date("2021-09-25").setHours(0, 0, 0, 0)
   );
 
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
 
-  const initialProcessedData = processRatingData(
-    props.fullData,
+  const initialData = processRatingData(
+    fullData,
     initialStartDate,
     initialEndDate
   );
 
-  const initialDateState = {
+  const initialState = {
     focusedInput: null,
-    startDate: initialStartDate,
-    endDate: initialEndDate,
-    lineChartState: initialProcessedData.lineChartData,
-    pieChartState: initialProcessedData.pieChartData,
+    ...initialData,
   };
 
-  function dateStateReducer(state, action) {
+  function stateReducer(state, action) {
     switch (action.type) {
       case "focusChange":
         return { ...state, focusedInput: action.payload };
+
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
-
-        const { lineChartData, pieChartData } = processRatingData(
-          props.fullData,
-          startDate,
-          endDate
-        );
-
-        console.log("props.fullData", props.fullData);
-        console.log("state", state);
+        const processedData = processRatingData(fullData, startDate, endDate);
 
         return {
           focusedInput,
-          lineChartState: lineChartData,
-          pieChartState: pieChartData,
-          endDate,
-          startDate,
+          ...processedData,
         };
 
       default:
@@ -65,13 +54,12 @@ const RatingContainer = (props) => {
     }
   }
 
-  const [state, dispatch] = useReducer(dateStateReducer, initialDateState);
+  const [state, dispatch] = useReducer(stateReducer, initialState);
 
   return (
     <Container>
-      <p>
-        Rating data from {state.lineChartState.datasets[0].data.length} games
-      </p>
+      <p>Line Chart data from {state.lineChartData.datasets[0].data.length} </p>
+      <p> Props data from {fullData.items.length} games</p>
 
       <DateRangeInput
         onDatesChange={(dateData) =>
@@ -88,8 +76,8 @@ const RatingContainer = (props) => {
       <p>start: {JSON.stringify(state.startDate)}</p>
       <p>end: {JSON.stringify(state.endDate)}</p>
       <br />
-      <LineChart chartData={state.lineChartState} />
-      <PieChart data={state.pieChartState} />
+      <LineChart chartData={state.lineChartData} />
+      <PieChart data={state.pieChartData} />
     </Container>
   );
 };

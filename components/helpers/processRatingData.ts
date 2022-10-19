@@ -90,12 +90,14 @@ export function composePieChartData(ratingData: RatingData) {
 
 export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   // filter the items by date
-  data.items = data.items.filter((item) => {
+  const newData = Object.assign({}, data);
+
+  newData.items = data.items.filter((item) => {
     const finishDate = new Date(item.finishDate * 1000);
     return finishDate >= startDate && finishDate <= endDate;
   });
 
-  return data;
+  return newData;
 }
 
 export function flattenRatingData(data: InputData): RatingData {
@@ -126,5 +128,7 @@ export function processRatingData(
   return {
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
+    startDate,
+    endDate,
   };
 }
