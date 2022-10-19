@@ -22,6 +22,20 @@ const RatingContainer = (props) => {
 
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
 
+  const initialProcessedData = processRatingData(
+    props.fullData,
+    initialStartDate,
+    initialEndDate
+  );
+
+  const initialDateState = {
+    focusedInput: null,
+    startDate: initialStartDate,
+    endDate: initialEndDate,
+    lineChartState: initialProcessedData.lineChartData,
+    pieChartState: initialProcessedData.pieChartData,
+  };
+
   function dateStateReducer(state, action) {
     switch (action.type) {
       case "focusChange":
@@ -41,7 +55,7 @@ const RatingContainer = (props) => {
         return {
           focusedInput,
           lineChartState: lineChartData,
-          // pieChartState: pieChartData,
+          pieChartState: pieChartData,
           endDate,
           startDate,
         };
@@ -50,20 +64,6 @@ const RatingContainer = (props) => {
         throw new Error();
     }
   }
-
-  const processedData = processRatingData(
-    props.fullData,
-    initialStartDate,
-    initialEndDate
-  );
-
-  const initialDateState = {
-    focusedInput: null,
-    startDate: initialStartDate,
-    endDate: initialEndDate,
-    lineChartState: processedData.lineChartData,
-    pieChartState: processedData.pieChartData,
-  };
 
   const [state, dispatch] = useReducer(dateStateReducer, initialDateState);
 
@@ -85,11 +85,11 @@ const RatingContainer = (props) => {
         focusedInput={state.focusedInput} // START_DATE, END_DATE or null
       />
 
-      {/* <p>start: {JSON.stringify(state.startDate)}</p>
-      <p>end: {JSON.stringify(state.endDate)}</p> */}
+      <p>start: {JSON.stringify(state.startDate)}</p>
+      <p>end: {JSON.stringify(state.endDate)}</p>
       <br />
       <LineChart chartData={state.lineChartState} />
-      {/* <PieChart data={state.pieChartState} /> */}
+      <PieChart data={state.pieChartState} />
     </Container>
   );
 };
