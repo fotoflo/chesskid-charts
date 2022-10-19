@@ -15,6 +15,7 @@ import {
   Datepicker,
 } from "@datepicker-react/styled";
 import { processRatingData } from "./helpers/processRatingData";
+import { PieChart } from "./PieChart";
 
 type Props = {};
 
@@ -22,6 +23,22 @@ const RatingContainer = (props) => {
   if (!props.data) {
     return <Loading />;
   }
+
+  const pieChartData = {
+    labels: ["Win", "Lose", "Draw"],
+    datasets: [
+      {
+        label: "Win/Lose/Draw",
+        data: [10, 50, 100],
+        backgroundColor: [
+          "rgb(54, 235, 90)",
+          "rgb(255, 86, 86)",
+          "rgba(184, 184, 184, 0.155)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
   const initialStartDate = new Date(
     new Date("2022-09-25").setHours(0, 0, 0, 0)
@@ -80,6 +97,7 @@ const RatingContainer = (props) => {
       <p>end: {JSON.stringify(state.endDate)}</p> */}
       <br />
       <LineChart chartData={state.lineChartState} />
+      <PieChart data={pieChartData} />
     </Container>
   );
 };

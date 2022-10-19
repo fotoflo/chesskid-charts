@@ -57,7 +57,7 @@ export function composeLineChartData(ratingData: RatingData) {
 export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   // filter the items by date
   data.items = data.items.filter((item) => {
-    const finishDate = new Date(item.finishDate * 1000).setHours(0, 0, 0, 0);
+    const finishDate = new Date(item.finishDate * 1000);
     return finishDate >= startDate && finishDate <= endDate;
   });
 
