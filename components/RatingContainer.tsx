@@ -16,8 +16,8 @@ import { RatingData } from "./helpers/processRatingData";
 
 type Props = {};
 
-const RatingContainer = ({ data }) => {
-  if (!data) {
+const RatingContainer = (props) => {
+  if (!props.data) {
     return <Loading />;
   }
 
@@ -34,12 +34,6 @@ const RatingContainer = ({ data }) => {
   };
   const [dateState, dispatch] = useReducer(reducer, initialDateState);
 
-  const initialRatingData = processRatingData(
-    data,
-    initialStartDate,
-    initialEndDate
-  );
-
   function reducer(state, action) {
     switch (action.type) {
       case "focusChange":
@@ -51,6 +45,12 @@ const RatingContainer = ({ data }) => {
         throw new Error();
     }
   }
+
+  const initialRatingData = processRatingData(
+    props.data,
+    initialStartDate,
+    initialEndDate
+  );
 
   const [LineChartData, setLineChartData] = useState(
     composeLineChartData(initialRatingData)
