@@ -32,9 +32,8 @@ const RatingContainer = (props) => {
     endDate: initialEndDate,
     focusedInput: null,
   };
-  const [dateState, dispatch] = useReducer(reducer, initialDateState);
 
-  function reducer(state, action) {
+  function dateStateReducer(state, action) {
     switch (action.type) {
       case "focusChange":
         return { ...state, focusedInput: action.payload };
@@ -46,19 +45,21 @@ const RatingContainer = (props) => {
     }
   }
 
+  const [dateState, dispatch] = useReducer(dateStateReducer, initialDateState);
+
   const initialRatingData = processRatingData(
     props.data,
     initialStartDate,
     initialEndDate
   );
 
-  const [LineChartData, setLineChartData] = useState(
+  const [lineChartState, setLineChartState] = useState(
     composeLineChartData(initialRatingData)
   );
 
   return (
     <Container>
-      <p>Rating data from {LineChartData.datasets[0].data.length} games</p>
+      <p>Rating data from {lineChartState.datasets[0].data.length} games</p>
 
       <DateRangeInput
         onDatesChange={(data) =>
@@ -74,7 +75,7 @@ const RatingContainer = (props) => {
 
       <p>start: {JSON.stringify(dateState.startDate)}</p>
       <p>end: {JSON.stringify(dateState.endDate)}</p>
-      <LineChart chartData={LineChartData} />
+      <LineChart chartData={lineChartState} />
     </Container>
   );
 };
