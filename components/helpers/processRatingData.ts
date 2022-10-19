@@ -38,6 +38,22 @@ type InputData = {
   }[];
 };
 
+export function composeLineChartData(ratingData: RatingData) {
+  return {
+    datasets: [
+      {
+        label: "rating",
+        data: ratingData.map((item) => {
+          return {
+            x: item.finishDate.toISOString().split("T")[0],
+            y: item.rating,
+          };
+        }),
+      },
+    ],
+  };
+}
+
 export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   // filter the items by date
   data.items = data.items.filter((item) => {

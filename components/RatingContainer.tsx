@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import LineChart from "./LineChart";
 
-import processRatingData from "components/helpers/processRatingData";
+import processRatingData, {
+  composeLineChartData,
+} from "components/helpers/processRatingData";
 import Loading from "./Loading";
 import {
   DateRangeInput,
@@ -22,6 +24,7 @@ const RatingContainer = ({ data }) => {
   const initialStartDate = new Date(
     new Date("2022-09-25").setHours(0, 0, 0, 0)
   );
+
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
 
   const initialDateState = {
@@ -29,6 +32,13 @@ const RatingContainer = ({ data }) => {
     endDate: initialEndDate,
     focusedInput: null,
   };
+  const [dateState, dispatch] = useReducer(reducer, initialDateState);
+
+  const initialRatingData = processRatingData(
+    data,
+    initialStartDate,
+    initialEndDate
+  );
 
   function reducer(state, action) {
     switch (action.type) {
@@ -42,32 +52,8 @@ const RatingContainer = ({ data }) => {
     }
   }
 
-  const [dateState, dispatch] = useReducer(reducer, initialDateState);
-
-  const ratingData = processRatingData(
-    data,
-    dateState.startDate,
-    dateState.endDate
-  );
-
-  const composeLineChartData = (ratingData: RatingData) => {
-    return {
-      datasets: [
-        {
-          label: "rating",
-          data: ratingData.map((item) => {
-            return {
-              x: item.finishDate.toISOString().split("T")[0],
-              y: item.rating,
-            };
-          }),
-        },
-      ],
-    };
-  };
-
   const [LineChartData, setLineChartData] = useState(
-    composeLineChartData(ratingData)
+    composeLineChartData(initialRatingData)
   );
 
   return (
