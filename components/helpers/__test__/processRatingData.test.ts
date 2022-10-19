@@ -2,8 +2,9 @@ import {
   flattenRatingData,
   filterByDate,
   composeLineChartData,
-  processRatingData,
   composePieChartData,
+  composeTopOpponents,
+  processRatingData,
 } from "../processRatingData";
 import fs from "fs";
 
@@ -102,5 +103,23 @@ describe("processRatingData(data,startDate,endDate)", () => {
     expect(result.lineChartData.datasets[0].data[0].y).toBe(1302);
 
     expect(result.pieChartData).toBeDefined();
+  });
+});
+
+describe("composeTopOpponents()", () => {
+  it("should return an array of objects with the top opponents", () => {
+    const ratingData = flattenRatingData(data);
+    const result = composeTopOpponents(ratingData);
+
+    expect(result.length).toBe(5);
+    expect(result[0].username).toBe("AngelDavidR");
+    expect(result[0].avatarUrl).toBe(
+      "https://www.chesskid.com/images/avatars/kids/100/kid-417.png"
+    );
+
+    expect(result[0].games.count).toBe(2);
+    expect(result[0].games.wins).toBe(2);
+    expect(result[0].games.losses).toBe(0);
+    expect(result[0].games.draws).toBe(0);
   });
 });

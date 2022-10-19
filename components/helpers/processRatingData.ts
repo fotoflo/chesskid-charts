@@ -21,6 +21,7 @@ type InputData = {
       timeControl: number;
     };
     opponent: {
+      id: string;
       rating: number;
       user: {
         username: string;
@@ -34,7 +35,7 @@ type InputData = {
   }[];
 };
 
-type Opponent = {
+type OpponentData = {
   username: string;
   games: {
     count: number;
@@ -62,7 +63,10 @@ export function composeLineChartData(ratingData: RatingData) {
   };
 }
 
-export function composeTopOpponents(ratingData: RatingData, limit = 5) {
+export function composeTopOpponents(
+  ratingData: RatingData,
+  limit = 5
+): OpponentData[] {
   const opponents = ratingData.reduce((acc, game) => {
     if (acc[game.opponentUsername]) {
       acc[game.opponentUsername].count += 1;
