@@ -19,9 +19,14 @@ const RatingContainer = ({ data }) => {
     return <Loading />;
   }
 
+  const initialStartDate = new Date(
+    new Date("2022-09-25").setHours(0, 0, 0, 0)
+  );
+  const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
+
   const initialDateState = {
-    startDate: new Date(new Date().setHours(0, 0, 0, 0)),
-    endDate: new Date(new Date().setHours(0, 0, 0, 0)),
+    startDate: initialStartDate,
+    endDate: initialEndDate,
     focusedInput: null,
   };
 
@@ -64,8 +69,6 @@ const RatingContainer = ({ data }) => {
   const [LineChartData, setLineChartData] = useState(
     composeLineChartData(ratingData)
   );
-
-  console.log("final data", LineChartData);
 
   return (
     <Container>
