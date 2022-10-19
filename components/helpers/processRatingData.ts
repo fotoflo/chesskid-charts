@@ -50,29 +50,43 @@ export function composeLineChartData(ratingData: RatingData) {
   };
 }
 
-export function composeTopOpponents(ratingData: RatingData) {
-  const opponents = ratingData.reduce((acc, item) => {
-    if (acc[item.opponentUsername]) {
-      acc[item.opponentUsername] += 1;
+export function composeTopOpponents(ratingData: RatingData, limit = 5) {
+  const opponents = ratingData.reduce((acc, game) => {
+    if (acc[game.opponentUsername]) {
+      acc[game.opponentUsername].count += 1;
     } else {
-      acc[item.opponentUsername] = 1;
+      acc[game.opponentUsername] = {};
+      acc[game.opponentUsername].count = 1;
+      acc[game.opponentUsername].wins = 0;
+      acc[game.opponentUsername].losses = 0;
+      acc[game.opponentUsername].draws = 0;
+    }
+
+    if (game.result === "win") {
+      acc[game.opponentUsername].wins += 1;
+    } else if (game.result === "loss") {
+      acc[game.opponentUsername].losses += 1;
+    } else {
+      acc[game.opponentUsername].draws += 1;
     }
 
     return acc;
-  }, {} as Record<string, number>);
+  }, {});
 
-  const sortedOpponents = Object.entries(opponents).sort((a, b) => b[1] - a[1]);
+  const sortedOpponents = Object.entries(opponents).sort((a, b) => {
+    return b[1].count - a[1].count;
+  });
 
-  return sortedOpponents.slice(0, 10).map((item) => {
-    const opponent = ratingData.find((game) => {
-      return (game.opponentUsername = item[0]);
+  return sortedOpponents.slice(0, limit).map((opponent) => {
+    const opponentData = ratingData.find((game) => {
+      return (game.opponentUsername = opponent[0]);
     });
 
     return {
-      username: item[0],
-      games: item[1],
-      avatarUrl: opponent.opponentAvatarUrl,
-      rating: opponent.opponentRating,
+      username: opponent[0],
+      games: opponent[1],
+      avatarUrl: opponentData.opponentAvatarUrl,
+      rating: opponentData.opponentRating,
     };
   });
 }
