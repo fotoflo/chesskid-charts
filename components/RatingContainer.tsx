@@ -1,23 +1,18 @@
 import React, { useState, useReducer } from "react";
 import styled from "styled-components";
 
-import LineChart from "./LineChart";
-
 import Loading from "./Loading";
-import { DateRangeInput } from "@datepicker-react/styled";
-import {
-  flattenRatingData,
-  composeLineChartData,
-  composePieChartData,
-  processRatingData,
-} from "./helpers/processRatingData";
 
+import { DateRangeInput } from "@datepicker-react/styled";
+import { processRatingData } from "./helpers/processRatingData";
+
+import LineChart from "./LineChart";
 import { PieChart } from "./PieChart";
 
 type Props = {};
 
 const RatingContainer = (props) => {
-  if (!props.data) {
+  if (!props.fullData) {
     return <Loading />;
   }
 
@@ -34,32 +29,40 @@ const RatingContainer = (props) => {
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
 
-        const { lineChartData: lineChartState, pieChartData: pieChartState } =
-          processRatingData(props.data, startDate, endDate);
+        const { lineChartData, pieChartData } = processRatingData(
+          props.fullData,
+          startDate,
+          endDate
+        );
+
+        console.log("props.fullData", props.fullData);
+        console.log("state", state);
 
         return {
-          lineChartState,
-          pieChartState,
-          endDate,
           focusedInput,
+          lineChartState: lineChartData,
+          // pieChartState: pieChartData,
+          endDate,
           startDate,
         };
+
       default:
         throw new Error();
     }
   }
 
-  const {
-    lineChartData: intialLineChartData,
-    pieChartData: initialRatingData,
-  } = processRatingData(props.data, initialStartDate, initialEndDate);
+  const processedData = processRatingData(
+    props.fullData,
+    initialStartDate,
+    initialEndDate
+  );
 
   const initialDateState = {
+    focusedInput: null,
     startDate: initialStartDate,
     endDate: initialEndDate,
-    focusedInput: null,
-    lineChartState: intialLineChartData,
-    pieChartState: initialRatingData,
+    lineChartState: processedData.lineChartData,
+    pieChartState: processedData.pieChartData,
   };
 
   const [state, dispatch] = useReducer(dateStateReducer, initialDateState);
@@ -86,13 +89,12 @@ const RatingContainer = (props) => {
       <p>end: {JSON.stringify(state.endDate)}</p> */}
       <br />
       <LineChart chartData={state.lineChartState} />
-      <PieChart data={state.pieChartState} />
+      {/* <PieChart data={state.pieChartState} /> */}
     </Container>
   );
 };
 
-const Container = styled("div")`
-  border: 2px solid red;
+const Container = styled.div`
   width: 700px;
   // center the content
   margin: 0 auto;

@@ -30,7 +30,7 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
 
 
         <Link href="/home">&lt; back</Link>>
-        <RatingContainer data={data} />
+        <RatingContainer fullData={data} />
       </Container>
     </>
   );
@@ -43,7 +43,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   );
   const data = JSON.parse(jsonData);
   let session = await ServersideSessionHandler(context);
-  console.log({ session });
   const props = {
     data,
   };
