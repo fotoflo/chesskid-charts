@@ -14,6 +14,7 @@ import {
   DateSingleInput,
   Datepicker,
 } from "@datepicker-react/styled";
+import { processRatingData } from "./helpers/processRatingData";
 
 type Props = {};
 
@@ -34,10 +35,11 @@ const RatingContainer = (props) => {
         return { ...state, focusedInput: action.payload };
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
-        const filteredData = filterByDate(props.data, startDate, endDate);
-        const ratingData = flattenRatingData(filteredData, startDate, endDate);
-        const lineChartState = composeLineChartData(ratingData);
-        lineChartState.isRerender = true;
+        const lineChartState = processRatingData(
+          props.data,
+          startDate,
+          endDate
+        );
 
         return { lineChartState, endDate, focusedInput, startDate };
       default:
@@ -74,8 +76,9 @@ const RatingContainer = (props) => {
         focusedInput={state.focusedInput} // START_DATE, END_DATE or null
       />
 
-      <p>start: {JSON.stringify(state.startDate)}</p>
-      <p>end: {JSON.stringify(state.endDate)}</p>
+      {/* <p>start: {JSON.stringify(state.startDate)}</p>
+      <p>end: {JSON.stringify(state.endDate)}</p> */}
+      <br />
       <LineChart chartData={state.lineChartState} />
     </Container>
   );

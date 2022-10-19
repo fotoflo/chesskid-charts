@@ -80,8 +80,12 @@ export function flattenRatingData(data: InputData): RatingData {
     });
 }
 
-export function RatingDataETL(data: InputData, startDate: Date, endDate: Date) {
-  const filteredData = filterByDate(props.data, startDate, endDate);
-  const ratingData = flattenRatingData(filteredData, startDate, endDate);
+export function processRatingData(
+  data: InputData,
+  startDate: Date,
+  endDate: Date
+) {
+  const filteredData = filterByDate(data, startDate, endDate);
+  const ratingData = flattenRatingData(filteredData);
   return composeLineChartData(ratingData);
 }

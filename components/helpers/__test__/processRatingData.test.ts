@@ -2,6 +2,7 @@ import {
   flattenRatingData,
   filterByDate,
   composeLineChartData,
+  processRatingData,
 } from "../processRatingData";
 import fs from "fs";
 
@@ -60,6 +61,21 @@ describe("composeLineChartData", () => {
   it("should return data in the format expected by the chart", () => {
     const ratingData = flattenRatingData(data);
     const result = composeLineChartData(ratingData);
+
+    expect(result.datasets.length).toBe(1);
+    expect(result.datasets[0].label).toBe("rating");
+    expect(result.datasets[0].data.length).toBe(10);
+    expect(result.datasets[0].data[0].x).toBe("2022-10-09");
+    expect(result.datasets[0].data[0].y).toBe(1302);
+  });
+});
+
+describe("processRatingData(data,startDate,endDate)", () => {
+  const startDate = new Date("2022-09-22");
+  const endDate = new Date("2022-10-11");
+
+  it("should return data in the format expected by chartJS", () => {
+    const result = processRatingData(data, startDate, endDate);
 
     expect(result.datasets.length).toBe(1);
     expect(result.datasets[0].label).toBe("rating");

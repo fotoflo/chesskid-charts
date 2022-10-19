@@ -26,8 +26,5 @@ export default function LineChart({ chartData }: Props) {
     },
   };
 
-  console.log("chartData: ", chartData.datasets[0].data.length);
-  console.log("isRerender: ", chartData.isRerender);
-
   return <Line data={chartData} options={options} />;
 }
