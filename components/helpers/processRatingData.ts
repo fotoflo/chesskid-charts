@@ -64,7 +64,7 @@ export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   return data;
 }
 
-export default function processRatingData(data: InputData): RatingData {
+export function flattenRatingData(data: InputData): RatingData {
   return data.items
     .filter((item) => item.category === "fast")
     .map((item: any) => {
@@ -78,4 +78,10 @@ export default function processRatingData(data: InputData): RatingData {
         opponentRating: item.opponent.rating,
       };
     });
+}
+
+export function RatingDataETL(data: InputData, startDate: Date, endDate: Date) {
+  const filteredData = filterByDate(props.data, startDate, endDate);
+  const ratingData = flattenRatingData(filteredData, startDate, endDate);
+  return composeLineChartData(ratingData);
 }

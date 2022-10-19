@@ -1,4 +1,5 @@
-import processRatingData, {
+import {
+  flattenRatingData,
   filterByDate,
   composeLineChartData,
 } from "../processRatingData";
@@ -40,9 +41,9 @@ describe("filterByDate(dataWithItemsArray)", () => {
   });
 });
 
-describe("processRatingData(dataWithItemsArray)", () => {
-  xit("should return flat data for the charts", () => {
-    const result = processRatingData(data);
+describe("flattenRatingData(dataWithItemsArray)", () => {
+  it("should return flat data for the charts", () => {
+    const result = flattenRatingData(data);
 
     expect(result.length).toBe(10);
     expect(typeof result[0]).toBe("object");
@@ -57,7 +58,7 @@ describe("processRatingData(dataWithItemsArray)", () => {
 
 describe("composeLineChartData", () => {
   it("should return data in the format expected by the chart", () => {
-    const ratingData = processRatingData(data);
+    const ratingData = flattenRatingData(data);
     const result = composeLineChartData(ratingData);
 
     expect(result.datasets.length).toBe(1);

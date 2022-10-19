@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import LineChart from "./LineChart";
 
-import processRatingData, {
+import {
+  flattenRatingData,
   composeLineChartData,
   filterByDate,
 } from "components/helpers/processRatingData";
@@ -34,7 +35,7 @@ const RatingContainer = (props) => {
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
         const filteredData = filterByDate(props.data, startDate, endDate);
-        const ratingData = processRatingData(filteredData, startDate, endDate);
+        const ratingData = flattenRatingData(filteredData, startDate, endDate);
         const lineChartState = composeLineChartData(ratingData);
         lineChartState.isRerender = true;
 
@@ -44,11 +45,7 @@ const RatingContainer = (props) => {
     }
   }
 
-  const initialRatingData = processRatingData(
-    props.data,
-    initialStartDate,
-    initialEndDate
-  );
+  const initialRatingData = flattenRatingData(props.data);
 
   const initialDateState = {
     startDate: initialStartDate,
