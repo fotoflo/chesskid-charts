@@ -8,21 +8,20 @@ import { processRatingData } from "./helpers/processRatingData";
 
 import LineChart from "./LineChart";
 import { PieChart } from "./PieChart";
+import { Col, Row } from "react-bootstrap";
 
 type Props = {};
 
 const RatingContainer = ({ fullData }) => {
   if (!fullData) {
-    return <Loading />;
+    return;
   }
 
   console.log("full data length", fullData.items.length);
 
-  const initialStartDate = new Date(
-    new Date("2021-09-25").setHours(0, 0, 0, 0)
-  );
-
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
+  const now = new Date(new Date().setHours(0, 0, 0, 0));
+  const initialStartDate = new Date(now.setDate(now.getDate() - 30));
 
   const initialData = processRatingData(
     fullData,
@@ -76,8 +75,12 @@ const RatingContainer = ({ fullData }) => {
       <p>start: {JSON.stringify(state.startDate)}</p>
       <p>end: {JSON.stringify(state.endDate)}</p>
       <br />
+      <Row>
+        <Col md="2">
+          <PieChart data={state.pieChartData} />
+        </Col>
+      </Row>
       <LineChart chartData={state.lineChartData} />
-      <PieChart data={state.pieChartData} />
     </Container>
   );
 };
