@@ -52,7 +52,7 @@ const RatingContainer = (props) => {
         return { ...state, focusedInput: action.payload };
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
-        const lineChartState = processRatingData(
+        const { lineChartData: lineChartState } = processRatingData(
           props.data,
           startDate,
           endDate

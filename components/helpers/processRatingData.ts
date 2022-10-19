@@ -87,5 +87,5 @@ export function processRatingData(
 ) {
   const filteredData = filterByDate(data, startDate, endDate);
   const ratingData = flattenRatingData(filteredData);
-  return composeLineChartData(ratingData);
+  return { lineChartData: composeLineChartData(ratingData) };
 }

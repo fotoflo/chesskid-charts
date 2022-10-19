@@ -77,10 +77,10 @@ describe("processRatingData(data,startDate,endDate)", () => {
   it("should return data in the format expected by chartJS", () => {
     const result = processRatingData(data, startDate, endDate);
 
-    expect(result.datasets.length).toBe(1);
-    expect(result.datasets[0].label).toBe("rating");
-    expect(result.datasets[0].data.length).toBe(10);
-    expect(result.datasets[0].data[0].x).toBe("2022-10-09");
-    expect(result.datasets[0].data[0].y).toBe(1302);
+    expect(result.lineChartData.datasets.length).toBe(1);
+    expect(result.lineChartData.datasets[0].label).toBe("rating");
+    expect(result.lineChartData.datasets[0].data.length).toBe(10);
+    expect(result.lineChartData.datasets[0].data[0].x).toBe("2022-10-09");
+    expect(result.lineChartData.datasets[0].data[0].y).toBe(1302);
   });
 });
