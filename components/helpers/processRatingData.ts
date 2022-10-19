@@ -34,6 +34,18 @@ type InputData = {
   }[];
 };
 
+type Opponent = {
+  username: string;
+  games: {
+    count: number;
+    wins: number;
+    losses: number;
+    draws: number;
+  };
+  avatarUrl: string;
+  rating: number;
+};
+
 export function composeLineChartData(ratingData: RatingData) {
   return {
     datasets: [
@@ -79,7 +91,7 @@ export function composeTopOpponents(ratingData: RatingData, limit = 5) {
 
   return sortedOpponents.slice(0, limit).map((opponent) => {
     const opponentData = ratingData.find((game) => {
-      return (game.opponentUsername = opponent[0]);
+      return game.opponentUsername === opponent[0];
     });
 
     return {

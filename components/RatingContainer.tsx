@@ -10,6 +10,8 @@ import LineChart from "./LineChart";
 import { PieChart } from "./PieChart";
 import { Col, Container, Row } from "react-bootstrap";
 
+import OpponentList from "./rating/OpponentList";
+
 type Props = {};
 
 const RatingContainer = ({ fullData }) => {
@@ -76,7 +78,8 @@ const RatingContainer = ({ fullData }) => {
           <p>
             Games played in date range: &nbsp;
             {state.lineChartData.datasets[0].data.length}
-            Top Opponents: {JSON.stringify(state.topOpponents)}
+            <br />
+            <OpponentList opponents={state.topOpponents} />
           </p>
         </Col>
       </Row>
