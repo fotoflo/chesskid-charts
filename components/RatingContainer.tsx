@@ -10,6 +10,7 @@ import {
   DateSingleInput,
   Datepicker,
 } from "@datepicker-react/styled";
+import { RatingData } from "./helpers/processRatingData";
 
 type Props = {};
 
@@ -44,19 +45,25 @@ const RatingContainer = ({ data }) => {
     dateState.endDate
   );
 
-  const [LineChartData, setLineChartData] = useState({
-    datasets: [
-      {
-        label: "rating",
-        data: ratingData.map((item) => {
-          return {
-            x: item.finishDate.toISOString().split("T")[0],
-            y: item.rating,
-          };
-        }),
-      },
-    ],
-  });
+  const composeLineChartData = (ratingData: RatingData) => {
+    return {
+      datasets: [
+        {
+          label: "rating",
+          data: ratingData.map((item) => {
+            return {
+              x: item.finishDate.toISOString().split("T")[0],
+              y: item.rating,
+            };
+          }),
+        },
+      ],
+    };
+  };
+
+  const [LineChartData, setLineChartData] = useState(
+    composeLineChartData(ratingData)
+  );
 
   console.log("final data", LineChartData);
 
