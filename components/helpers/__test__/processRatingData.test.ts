@@ -55,6 +55,10 @@ describe("flattenRatingData(dataWithItemsArray)", () => {
     expect(result[0].rating).toBe(1302);
     expect(result[0].playerColor).toBe(1);
     expect(result[0].result).toBe("win");
+    expect(result[0].opponentUsername).toBe("GoldSunnyTreasure");
+    expect(result[0].opponentAvatarUrl).toBe(
+      "https://www.chesskid.com/images/avatars/kids/100/kid-321.png"
+    );
   });
 });
 

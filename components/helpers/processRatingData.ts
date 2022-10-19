@@ -8,21 +8,9 @@ export type RatingData = {
   playerColor: 1 | 2;
   result: "win" | "loss" | "draw";
   opponentRating: number;
+  opponentUsername: string;
+  opponentAvatarUrl: string;
 }[];
-
-const trunkatedSample = {
-  category: "fast",
-  finishDate: 1665273425,
-  humanGameInfo: {
-    rating: 1295,
-    timeControl: 900,
-  },
-  opponent: {
-    rating: 1310,
-  },
-  playerColor: 2,
-  result: "win",
-};
 
 type InputData = {
   items: {
@@ -34,6 +22,12 @@ type InputData = {
     };
     opponent: {
       rating: number;
+      user: {
+        username: string;
+        avatar: {
+          url: string;
+        };
+      };
     };
     playerColor: 1 | 2;
     result: "win" | "loss" | "draw";
@@ -54,6 +48,33 @@ export function composeLineChartData(ratingData: RatingData) {
       },
     ],
   };
+}
+
+export function composeTopOpponents(ratingData: RatingData) {
+  const opponents = ratingData.reduce((acc, item) => {
+    if (acc[item.opponentUsername]) {
+      acc[item.opponentUsername] += 1;
+    } else {
+      acc[item.opponentUsername] = 1;
+    }
+
+    return acc;
+  }, {} as Record<string, number>);
+
+  const sortedOpponents = Object.entries(opponents).sort((a, b) => b[1] - a[1]);
+
+  return sortedOpponents.slice(0, 10).map((item) => {
+    const opponent = ratingData.find((game) => {
+      return (game.opponentUsername = item[0]);
+    });
+
+    return {
+      username: item[0],
+      games: item[1],
+      avatarUrl: opponent.opponentAvatarUrl,
+      rating: opponent.opponentRating,
+    };
+  });
 }
 
 export function composePieChartData(ratingData: RatingData) {
@@ -114,6 +135,8 @@ export function flattenRatingData(data: InputData): RatingData {
         playerColor: item.playerColor,
         result: item.result,
         opponentRating: item.opponent.rating,
+        opponentUsername: item.opponent.user.username,
+        opponentAvatarUrl: item.opponent.user.avatar.url,
       };
     });
 }
@@ -126,6 +149,7 @@ export function processRatingData(
   const filteredData = filterByDate(data, startDate, endDate);
   const ratingData = flattenRatingData(filteredData);
   return {
+    topOpponents: composeTopOpponents(ratingData),
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
     startDate,

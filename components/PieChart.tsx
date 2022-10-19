@@ -15,5 +15,5 @@ export function PieChart({ data }) {
 }
 
 const ChartContainer = styled(Container)`
-  width: 20em;
+  width: 15em;
 `;

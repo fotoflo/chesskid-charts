@@ -8,7 +8,7 @@ import { processRatingData } from "./helpers/processRatingData";
 
 import LineChart from "./LineChart";
 import { PieChart } from "./PieChart";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 type Props = {};
 
@@ -16,8 +16,6 @@ const RatingContainer = ({ fullData }) => {
   if (!fullData) {
     return;
   }
-
-  console.log("full data length", fullData.items.length);
 
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
   const now = new Date(new Date().setHours(0, 0, 0, 0));
@@ -30,8 +28,8 @@ const RatingContainer = ({ fullData }) => {
   );
 
   const initialState = {
-    focusedInput: null,
     ...initialData,
+    focusedInput: null,
   };
 
   function stateReducer(state, action) {
@@ -56,18 +54,32 @@ const RatingContainer = ({ fullData }) => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
 
   return (
-    <Container>
-      <DateRangeInput
-        onDatesChange={(dateData) =>
-          dispatch({ type: "dateChange", payload: dateData })
-        }
-        onFocusChange={(focusedInput) =>
-          dispatch({ type: "focusChange", payload: focusedInput })
-        }
-        startDate={state.startDate} // Date or null
-        endDate={state.endDate} // Date or null
-        focusedInput={state.focusedInput} // START_DATE, END_DATE or null
-      />
+    <ChartContainer fluid>
+      <Row>
+        <Col md="12">
+          <DateRangeInput
+            onDatesChange={(dateData) =>
+              dispatch({ type: "dateChange", payload: dateData })
+            }
+            onFocusChange={(focusedInput) =>
+              dispatch({ type: "focusChange", payload: focusedInput })
+            }
+            startDate={state.startDate} // Date or null
+            endDate={state.endDate} // Date or null
+            focusedInput={state.focusedInput} // START_DATE, END_DATE or null
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
+          <p> Total Games Played: {fullData.items.length}</p>
+          <p>
+            Games played in date range: &nbsp;
+            {state.lineChartData.datasets[0].data.length}
+            Top Opponents: {JSON.stringify(state.topOpponents)}
+          </p>
+        </Col>
+      </Row>
 
       <br />
       <Row>
@@ -75,13 +87,16 @@ const RatingContainer = ({ fullData }) => {
           <PieChart data={state.pieChartData} />
         </Col>
       </Row>
-      <LineChart chartData={state.lineChartData} />
-    </Container>
+      <Row>
+        <Col md="12">
+          <LineChart chartData={state.lineChartData} />
+        </Col>
+      </Row>
+    </ChartContainer>
   );
 };
 
-const Container = styled.div`
-  width: 700px;
+const ChartContainer = styled(Container)`
   // center the content
   margin: 0 auto;
   padding: 1em;
