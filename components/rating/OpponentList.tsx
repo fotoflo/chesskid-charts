@@ -7,7 +7,6 @@ type Props = {};
 const OpponentList = ({ opponents }) => {
   return (
     <>
-      {JSON.stringify(opponents)} {/* // no hydration error */}
       <>
         {/* // hydration error */}
         {opponents.map(

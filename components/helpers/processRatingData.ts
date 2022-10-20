@@ -179,7 +179,7 @@ export function processRatingData(
   const filteredData = filterByDate(data, startDate, endDate);
   const ratingData = flattenRatingData(filteredData);
   return {
-    topOpponents: composeTopOpponents(ratingData),
+    topOpponents: composeTopOpponents(ratingData, 3),
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
     startDate,

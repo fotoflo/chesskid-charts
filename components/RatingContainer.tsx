@@ -82,11 +82,7 @@ const RatingContainer = ({ fullData }) => {
             <OpponentList opponents={state.topOpponents} />
           </p>
         </Col>
-      </Row>
-
-      <br />
-      <Row>
-        <Col md="2">
+        <Col md="6">
           <PieChart data={state.pieChartData} />
         </Col>
       </Row>
