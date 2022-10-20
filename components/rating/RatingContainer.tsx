@@ -1,16 +1,13 @@
 import React, { useState, useReducer } from "react";
 import styled from "styled-components";
 
-import Loading from "./Loading";
-
-import { DateRangeInput } from "@datepicker-react/styled";
-import { processRatingData } from "./helpers/processRatingData";
-
-import LineChart from "./LineChart";
-import { PieChart } from "./PieChart";
 import { Col, Container, Row } from "react-bootstrap";
+import { DateRangeInput } from "@datepicker-react/styled";
 
-import OpponentList from "./rating/OpponentList";
+import LineChart from "components/charts/LineChart";
+import { PieChart } from "components/charts/PieChart";
+import { processRatingData } from "components/helpers/processRatingData";
+import OpponentList from "components/rating/OpponentList";
 
 type Props = {};
 

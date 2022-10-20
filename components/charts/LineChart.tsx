@@ -9,7 +9,6 @@ import {
   LineElement,
   Tooltip,
 } from "chart.js";
-import { Chart } from "react-chartjs-2";
 
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip);
 

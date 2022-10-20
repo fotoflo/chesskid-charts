@@ -12,7 +12,7 @@ export type RatingData = {
   opponentAvatarUrl: string;
 }[];
 
-type InputData = {
+export type InputData = {
   items: {
     category: "fast";
     finishDate: number | string | Date;
@@ -35,7 +35,7 @@ type InputData = {
   }[];
 };
 
-type OpponentData = {
+export type OpponentData = {
   username: string;
   games: {
     count: number;

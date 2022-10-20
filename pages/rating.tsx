@@ -3,7 +3,7 @@ import fsPromises from "fs/promises";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import RatingContainer from "components/RatingContainer";
+import RatingContainer from "components/rating/RatingContainer";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import { ServersideSessionHandler } from "lib/middleware";
