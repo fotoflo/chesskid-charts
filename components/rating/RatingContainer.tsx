@@ -18,7 +18,8 @@ const RatingContainer = ({ fullData }) => {
 
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
   const now = new Date();
-  const initialStartDate = new Date(now.getDate() - 30).setHours(0, 0, 0, 0);
+  const backdate = new Date(now.setDate(now.getDate() - 30));
+  const initialStartDate = new Date(backdate).setHours(0, 0, 0, 0);
 
   const initialData = processRatingData(
     fullData,
