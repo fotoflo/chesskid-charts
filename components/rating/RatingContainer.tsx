@@ -17,8 +17,8 @@ const RatingContainer = ({ fullData }) => {
   }
 
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
-  const now = new Date(new Date().setHours(0, 0, 0, 0));
-  const initialStartDate = new Date(now.setDate(now.getDate() - 30));
+  const now = new Date();
+  const initialStartDate = new Date(now.getDate() - 30).setHours(0, 0, 0, 0);
 
   const initialData = processRatingData(
     fullData,
@@ -76,7 +76,6 @@ const RatingContainer = ({ fullData }) => {
             Games played in date range: &nbsp;
             {state.lineChartData.datasets[0].data.length}
             <br />
-            <OpponentList opponents={state.topOpponents} />
           </p>
         </Col>
         <Col md="6">
