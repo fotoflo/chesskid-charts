@@ -20,6 +20,9 @@ const RatingContainer = ({ fullData }) => {
   const now = new Date();
   const backdate = new Date(now.setDate(now.getDate() - 30));
   const initialStartDate = new Date(backdate).setHours(0, 0, 0, 0);
+  const firstDate = new Date(
+    fullData.items[fullData.items.length - 1].finishDate * 1000
+  );
 
   const initialData = processRatingData(
     fullData,
@@ -67,6 +70,8 @@ const RatingContainer = ({ fullData }) => {
             startDate={state.startDate} // Date or null
             endDate={state.endDate} // Date or null
             focusedInput={state.focusedInput} // START_DATE, END_DATE or null
+            maxBookingDate={now}
+            minBookingDate={firstDate}
           />
         </Col>
       </Row>
