@@ -83,16 +83,20 @@ export function flattenRatingData(data: InputData): RatingData {
 
 export function processRatingData(
   data: InputData,
-  startDate: Date,
-  endDate: Date
+  options: {
+    startDate: Date;
+    endDate: Date;
+    opponentlimit: number;
+    opponentSortType: "rating" | "gameCount";
+  }
 ) {
-  const filteredData = filterByDate(data, startDate, endDate);
+  const filteredData = filterByDate(data, options.startDate, options.endDate);
   const ratingData = flattenRatingData(filteredData);
   return {
     topOpponents: composeTopOpponents(ratingData, 3),
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
-    startDate,
-    endDate,
+    startDate: options.startDate,
+    endDate: options.endDate,
   };
 }

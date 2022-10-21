@@ -1,8 +1,4 @@
-import {
-  flattenRatingData,
-  filterByDate,
-  processRatingData,
-} from "../processRatingData";
+import { flattenRatingData } from "../processRatingData";
 
 import {
   composeLineChartData,

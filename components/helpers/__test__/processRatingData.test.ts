@@ -65,7 +65,7 @@ describe("processRatingData(data,startDate,endDate)", () => {
   const endDate = new Date("2022-10-11");
 
   it("should return data in the format expected by chartJS", () => {
-    const result = processRatingData(data, startDate, endDate);
+    const result = processRatingData(data, { startDate, endDate });
 
     expect(result.lineChartData.datasets.length).toBe(1);
     expect(result.lineChartData.datasets[0].label).toBe("rating");

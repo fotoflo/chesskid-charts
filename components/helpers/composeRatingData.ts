@@ -31,7 +31,7 @@ function sortOpponentsByRating(opponents: OpponentData[]) {
 export function composeTopOpponents(
   ratingData: readonly RatingData[],
   limit: number = 5,
-  sortType: "rating" | "gameCount" = "rating"
+  sortType: "rating" | "gameCount" = "gameCount"
 ): OpponentData[] {
   const opponents = ratingData.reduce((acc, game) => {
     if (acc[game.opponentUsername]) {

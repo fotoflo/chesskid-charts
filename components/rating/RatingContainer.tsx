@@ -32,11 +32,11 @@ const RatingContainer = ({ fullData }) => {
       : setOpponentSortType("rating");
   };
 
-  const initialData = processRatingData(
-    fullData,
-    initialStartDate,
-    initialEndDate
-  );
+  const initialData = processRatingData(fullData, {
+    startDate: initialStartDate,
+    endDate: initialEndDate,
+    opponentSortType,
+  });
 
   const initialState = {
     ...initialData,
@@ -50,7 +50,11 @@ const RatingContainer = ({ fullData }) => {
 
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
-        const processedData = processRatingData(fullData, startDate, endDate);
+        const processedData = processRatingData(fullData, {
+          startDate,
+          endDate,
+          opponentSortType,
+        });
 
         return {
           focusedInput,
