@@ -78,6 +78,7 @@ const RatingContainer = ({ fullData }) => {
             {state.lineChartData.datasets[0].data.length}
             <br />
           </p>
+          <OpponentList opponents={state.topOpponents} />
         </Col>
         <Col md="6">
           <PieChart data={state.pieChartData} />

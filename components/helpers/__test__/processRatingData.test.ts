@@ -1,9 +1,6 @@
 import {
   flattenRatingData,
   filterByDate,
-  composeLineChartData,
-  composePieChartData,
-  composeTopOpponents,
   processRatingData,
 } from "../processRatingData";
 import fs from "fs";
@@ -31,13 +28,13 @@ describe("filterByDate(dataWithItemsArray)", () => {
     expect(typeof result.items[0].finishDate).toEqual("number");
   });
 
-  xit("should return an array of objects with with finishDates after StartDate", () => {
+  it("should return an array of objects with with finishDates after StartDate", () => {
     const result = filterByDate(data, lateStartDate, endDate);
     expect(result.items.length).toBe(9);
     expect(typeof result.items[0].finishDate).toEqual("number");
   });
 
-  xit("should return an array of objects with with finishDates before EndDate", () => {
+  it("should return an array of objects with with finishDates before EndDate", () => {
     const result = filterByDate(data, startDate, earlyEndDate);
     expect(result.items.length).toBe(8); // why? looks wrong
     expect(typeof result.items[0].finishDate).toEqual("number");
@@ -63,32 +60,6 @@ describe("flattenRatingData(dataWithItemsArray)", () => {
   });
 });
 
-describe("composeLineChartData", () => {
-  it("should return data in the format expected by the Line chart", () => {
-    const ratingData = flattenRatingData(data);
-    const result = composeLineChartData(ratingData);
-
-    expect(result.datasets.length).toBe(1);
-    expect(result.datasets[0].label).toBe("rating");
-    expect(result.datasets[0].data.length).toBe(10);
-    expect(result.datasets[0].data[0].x).toBe("2022-10-09");
-    expect(result.datasets[0].data[0].y).toBe(1302);
-  });
-});
-
-describe("composePieChartData(ratingData)", () => {
-  it("should return data in the format expected by the Pie chart", () => {
-    const ratingData = flattenRatingData(data);
-    const result = composePieChartData(ratingData);
-
-    expect(typeof result).toBe("object");
-    expect(result.labels.length).toBe(3);
-    expect(result.labels[0]).toBe("Wins");
-    expect(result.labels[1]).toBe("Losses");
-    expect(result.labels[2]).toBe("Draws");
-  });
-});
-
 describe("processRatingData(data,startDate,endDate)", () => {
   const startDate = new Date("2022-09-22");
   const endDate = new Date("2022-10-11");
@@ -103,23 +74,5 @@ describe("processRatingData(data,startDate,endDate)", () => {
     expect(result.lineChartData.datasets[0].data[0].y).toBe(1302);
 
     expect(result.pieChartData).toBeDefined();
-  });
-});
-
-describe("composeTopOpponents()", () => {
-  it("should return an array of objects with the top opponents", () => {
-    const ratingData = flattenRatingData(data);
-    const result = composeTopOpponents(ratingData);
-
-    expect(result.length).toBe(5);
-    expect(result[0].username).toBe("AngelDavidR");
-    expect(result[0].avatarUrl).toBe(
-      "https://www.chesskid.com/images/avatars/kids/100/kid-417.png"
-    );
-
-    expect(result[0].games.count).toBe(2);
-    expect(result[0].games.wins).toBe(2);
-    expect(result[0].games.losses).toBe(0);
-    expect(result[0].games.draws).toBe(0);
   });
 });
