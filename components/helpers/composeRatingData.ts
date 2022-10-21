@@ -1,3 +1,5 @@
+import { OpponentData, RatingData } from "./processRatingData";
+
 export function composeLineChartData(ratingData: RatingData) {
   return {
     datasets: [
@@ -14,15 +16,29 @@ export function composeLineChartData(ratingData: RatingData) {
   };
 }
 
+function sortOpponentsByGameCount(opponents: OpponentData[]) {
+  return Object.entries(opponents).sort((a, b) => {
+    return b[1].count - a[1].count;
+  });
+}
+
+function sortOpponentsByRating(opponents: OpponentData[]) {
+  return Object.entries(opponents).sort((a, b) => {
+    return b[1].rating - a[1].rating;
+  });
+}
+
 export function composeTopOpponents(
-  ratingData: RatingData,
-  limit = 5
+  ratingData: readonly RatingData[],
+  limit: number = 5,
+  sortType: "rating" | "gameCount" = "rating"
 ): OpponentData[] {
   const opponents = ratingData.reduce((acc, game) => {
     if (acc[game.opponentUsername]) {
       acc[game.opponentUsername].count += 1;
     } else {
       acc[game.opponentUsername] = {};
+      acc[game.opponentUsername].rating = game.opponentRating;
       acc[game.opponentUsername].count = 1;
       acc[game.opponentUsername].wins = 0;
       acc[game.opponentUsername].losses = 0;
@@ -40,9 +56,10 @@ export function composeTopOpponents(
     return acc;
   }, {});
 
-  const sortedOpponents = Object.entries(opponents).sort((a, b) => {
-    return b[1].count - a[1].count;
-  });
+  const sortedOpponents =
+    sortType === "gameCount"
+      ? sortOpponentsByGameCount(opponents)
+      : sortOpponentsByRating(opponents);
 
   return sortedOpponents.slice(0, limit).map((opponent) => {
     const opponentData = ratingData.find((game) => {
