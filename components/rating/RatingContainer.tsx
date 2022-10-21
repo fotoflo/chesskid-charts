@@ -24,6 +24,14 @@ const RatingContainer = ({ fullData }) => {
     fullData.items[fullData.items.length - 1].finishDate * 1000
   );
 
+  const [opponentSortType, setOpponentSortType] = useState("rating");
+
+  const toggleOpponentSortType = () => {
+    opponentSortType === "rating"
+      ? setOpponentSortType("gameCount")
+      : setOpponentSortType("rating");
+  };
+
   const initialData = processRatingData(
     fullData,
     initialStartDate,
@@ -83,7 +91,11 @@ const RatingContainer = ({ fullData }) => {
             {state.lineChartData.datasets[0].data.length}
             <br />
           </p>
-          <OpponentList opponents={state.topOpponents} />
+          <OpponentList
+            opponents={state.topOpponents}
+            sortType={opponentSortType}
+            toggleSortType={toggleOpponentSortType}
+          />
         </Col>
         <Col md="6">
           <PieChart data={state.pieChartData} />
