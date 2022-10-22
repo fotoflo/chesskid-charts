@@ -11,6 +11,10 @@ import OpponentList from "components/rating/OpponentList";
 
 type Props = {};
 
+export const toggleSortType = (sortType: "rating" | "gameCount") => {
+  return sortType === "rating" ? "gameCount" : "rating";
+};
+
 const RatingContainer = ({ fullData }) => {
   if (!fullData) {
     return;
@@ -60,8 +64,7 @@ const RatingContainer = ({ fullData }) => {
         };
       case "toggleSortType":
         console.log("currentSortType", state.opponentSortType);
-        const newOpponentSortType =
-          state.opponentSortType === "rating" ? "gameCount" : "rating";
+        const newOpponentSortType = toggleSortType(state.opponentSortType);
         console.log("newOpponentSortType", newOpponentSortType);
 
         const processedData = processRatingData(fullData, {
@@ -113,7 +116,7 @@ const RatingContainer = ({ fullData }) => {
           <OpponentList
             opponents={state.topOpponents}
             sortType={state.opponentSortType}
-            toggleSortType={() =>
+            dispatchToggleSortType={() =>
               dispatch({
                 type: "toggleSortType",
               })

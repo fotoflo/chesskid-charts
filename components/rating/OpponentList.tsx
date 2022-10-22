@@ -5,22 +5,27 @@ import { OpponentData } from "components/helpers/processRatingData.ts";
 
 import Button from "react-bootstrap/Button";
 import { capitalizeFirstLetter } from "utils/stringUtils";
+import { toggleSortType } from "./RatingContainer";
 
 type Props = {
   opponents: OpponentData[];
   sortType: "rating" | "gameCount";
-  toggleSortType: (sortType: "rating" | "gameCount") => void;
+  dispatchToggleSortType: () => void;
 };
 
-const OpponentList = ({ opponents, sortType, toggleSortType }: Props) => {
+const OpponentList = ({
+  opponents,
+  sortType,
+  dispatchToggleSortType,
+}: Props) => {
   if (!opponents) {
     return <p> {`No games in this date range`} </p>;
   }
 
   return (
     <>
-      <Button onClick={toggleSortType}>
-        Sort By {capitalizeFirstLetter(sortType)}
+      <Button onClick={dispatchToggleSortType}>
+        Sort By {capitalizeFirstLetter(toggleSortType(sortType))}
       </Button>
       <ul>
         {opponents.map((opponent) => {
