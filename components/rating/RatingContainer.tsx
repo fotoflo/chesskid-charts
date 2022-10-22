@@ -8,7 +8,6 @@ import LineChart from "components/charts/LineChart";
 import { PieChart } from "components/charts/PieChart";
 import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
-import { de } from "date-fns/locale";
 
 type Props = {};
 
@@ -30,7 +29,7 @@ const RatingContainer = ({ fullData }) => {
   const initialData = processRatingData(fullData, {
     startDate: initialStartDate,
     endDate: initialEndDate,
-    opponentlimit: 5,
+    opponentLimit: 3,
     opponentSortType: initialOpponentSortType,
   });
 
@@ -39,7 +38,9 @@ const RatingContainer = ({ fullData }) => {
     focusedInput: null,
   };
 
-  function stateReducer(state, action) {
+  type RatingState = ReturnType<typeof initialData>;
+
+  function stateReducer(state: RatingState, action) {
     switch (action.type) {
       case "focusChange":
         return { ...state, focusedInput: action.payload };
@@ -47,6 +48,8 @@ const RatingContainer = ({ fullData }) => {
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
         const dateChangeData = processRatingData(fullData, {
+          opponentLimit: state.opponentLimit,
+          opponentSortType: state.opponentSortType,
           startDate,
           endDate,
         });
@@ -64,6 +67,7 @@ const RatingContainer = ({ fullData }) => {
         const processedData = processRatingData(fullData, {
           startDate: state.startDate,
           endDate: state.endDate,
+          opponentLimit: state.opponentLimit,
           opponentSortType: newOpponentSortType,
         });
 

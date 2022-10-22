@@ -1,6 +1,6 @@
 import { OpponentData, RatingData } from "./processRatingData";
 
-export function composeLineChartData(ratingData: RatingData) {
+export function composeLineChartData(ratingData: RatingData[]) {
   return {
     datasets: [
       {
@@ -29,7 +29,7 @@ function sortOpponentsByRating(opponents: OpponentData[]) {
 }
 
 export function composeTopOpponents(
-  ratingData: readonly RatingData[],
+  ratingData: RatingData[],
   limit: number = 5,
   sortType: "rating" | "gameCount" = "gameCount"
 ): OpponentData[] {
@@ -75,7 +75,7 @@ export function composeTopOpponents(
   });
 }
 
-export function composePieChartData(ratingData: RatingData) {
+export function composePieChartData(ratingData: RatingData[]) {
   let wins = 0;
   let losses = 0;
   let draws = 0;

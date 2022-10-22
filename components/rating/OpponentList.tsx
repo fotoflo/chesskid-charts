@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { OpponentData } from "components/helpers/processRatingData.ts";
 
 import Button from "react-bootstrap/Button";
+import { capitalizeFirstLetter } from "utils/stringUtils";
 
 type Props = {
   opponents: OpponentData[];
@@ -18,7 +19,9 @@ const OpponentList = ({ opponents, sortType, toggleSortType }: Props) => {
 
   return (
     <>
-      <Button onClick={toggleSortType}>t: {sortType}</Button>
+      <Button onClick={toggleSortType}>
+        Sort By {capitalizeFirstLetter(sortType)}
+      </Button>
       <ul>
         {opponents.map((opponent) => {
           return (

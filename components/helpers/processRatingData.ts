@@ -14,7 +14,7 @@ export type RatingData = {
   opponentRating: number;
   opponentUsername: string;
   opponentAvatarUrl: string;
-}[];
+};
 
 export type InputData = {
   items: {
@@ -63,7 +63,7 @@ export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   return newData;
 }
 
-export function flattenRatingData(data: InputData): RatingData {
+export function flattenRatingData(data: InputData): RatingData[] {
   return data.items
     .filter((item) => item.category === "fast")
     .map((item: any) => {
@@ -86,16 +86,17 @@ export function processRatingData(
   options: {
     startDate: Date;
     endDate: Date;
-    opponentlimit: number;
+    opponentLimit: number;
     opponentSortType: "rating" | "gameCount";
   }
 ) {
   const filteredData = filterByDate(data, options.startDate, options.endDate);
   const ratingData = flattenRatingData(filteredData);
+
   return {
     topOpponents: composeTopOpponents(
       ratingData,
-      options.opponentlimit,
+      options.opponentLimit,
       options.opponentSortType
     ),
     lineChartData: composeLineChartData(ratingData),
