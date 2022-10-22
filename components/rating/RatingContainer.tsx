@@ -101,7 +101,7 @@ const RatingContainer = ({ fullData }) => {
           startDate: state.startDate,
           endDate: state.endDate,
           opponentLimit: state.opponentLimit,
-          opponentSortType: state.pponentSortType,
+          opponentSortType: state.opponentSortType,
           filterColor: newFilterColor,
         });
 
