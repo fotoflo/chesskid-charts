@@ -63,6 +63,24 @@ export function filterByDate(data: InputData, startDate: Date, endDate: Date) {
   return newData;
 }
 
+export function filterByPlayerColor(
+  data: InputData,
+  playerColor: "all" | "white" | "black"
+) {
+  if (playerColor === "all") {
+    return data;
+  }
+
+  const newData = Object.assign({}, data);
+
+  const selectedColor = playerColor === "white" ? 1 : 2;
+  newData.items = data.items.filter((item) => {
+    return item.playerColor === selectedColor;
+  });
+
+  return newData;
+}
+
 export function flattenRatingData(data: InputData): RatingData[] {
   return data.items
     .filter((item) => item.category === "fast")

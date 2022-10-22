@@ -2,6 +2,7 @@ import {
   flattenRatingData,
   filterByDate,
   processRatingData,
+  filterByPlayerColor,
 } from "../processRatingData";
 import fs from "fs";
 
@@ -114,5 +115,26 @@ describe("processRatingData(data,{startDate,endDate})", () => {
 
     expect(result.topOpponents.length).toBe(5);
     expect(result.topOpponents[0].username).toBe("AbruptTest");
+  });
+});
+
+describe('filterByPlayerColor(data, "all")', () => {
+  it("should return all items", () => {
+    const result = filterByPlayerColor(data, "all");
+    expect(result.items.length).toBe(10);
+  });
+});
+
+describe('filterByPlayerColor(data, "white")', () => {
+  it("should return all items", () => {
+    const result = filterByPlayerColor(data, "white");
+    expect(result.items.length).toBe(4);
+  });
+});
+
+describe('filterByPlayerColor(data, "black")', () => {
+  it("should return all items", () => {
+    const result = filterByPlayerColor(data, "black");
+    expect(result.items.length).toBe(6);
   });
 });
