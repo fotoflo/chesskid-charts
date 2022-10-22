@@ -1,7 +1,7 @@
 import React, { useState, useReducer } from "react";
 import styled from "styled-components";
 
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { DateRangeInput } from "@datepicker-react/styled";
 
 import LineChart from "components/charts/LineChart";
@@ -9,10 +9,23 @@ import { PieChart } from "components/charts/PieChart";
 import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
 
+import { capitalizeFirstLetter } from "utils/stringUtils";
+
 type Props = {};
 
 export const toggleSortType = (sortType: "rating" | "gameCount") => {
   return sortType === "rating" ? "gameCount" : "rating";
+};
+
+export const toggleFilterColor = (filterColor: "all" | "white" | "black") => {
+  switch (filterColor) {
+    case "all":
+      return "white";
+    case "white":
+      return "black";
+    case "black":
+      return "all";
+  }
 };
 
 const RatingContainer = ({ fullData }) => {
@@ -35,6 +48,7 @@ const RatingContainer = ({ fullData }) => {
     endDate: initialEndDate,
     opponentLimit: 3,
     opponentSortType: initialOpponentSortType,
+    filterColor: "all",
   });
 
   const initialState = {
@@ -45,6 +59,8 @@ const RatingContainer = ({ fullData }) => {
   type RatingState = ReturnType<typeof initialData>;
 
   function stateReducer(state: RatingState, action) {
+    let processedData;
+
     switch (action.type) {
       case "focusChange":
         return { ...state, focusedInput: action.payload };
@@ -56,6 +72,7 @@ const RatingContainer = ({ fullData }) => {
           opponentSortType: state.opponentSortType,
           startDate,
           endDate,
+          filterColor: "all",
         });
 
         return {
@@ -63,18 +80,30 @@ const RatingContainer = ({ fullData }) => {
           ...dateChangeData,
         };
       case "toggleSortType":
-        console.log("currentSortType", state.opponentSortType);
         const newOpponentSortType = toggleSortType(state.opponentSortType);
-        console.log("newOpponentSortType", newOpponentSortType);
 
-        const processedData = processRatingData(fullData, {
+        processedData = processRatingData(fullData, {
           startDate: state.startDate,
           endDate: state.endDate,
           opponentLimit: state.opponentLimit,
           opponentSortType: newOpponentSortType,
+          filterColor: "all",
         });
 
-        console.log("processedData", processedData);
+        return {
+          ...processedData,
+        };
+
+      case "toggleFilterColor":
+        const newFilterColor = toggleFilterColor(state.filterColor);
+
+        processedData = processRatingData(fullData, {
+          startDate: state.startDate,
+          endDate: state.endDate,
+          opponentLimit: state.opponentLimit,
+          opponentSortType: state.pponentSortType,
+          filterColor: newFilterColor,
+        });
 
         return {
           ...processedData,
@@ -112,6 +141,10 @@ const RatingContainer = ({ fullData }) => {
             Games played in date range: &nbsp;
             {state.lineChartData.datasets[0].data.length}
             <br />
+            <Button onClick={() => dispatch({ type: "toggleFilterColor" })}>
+              Showing games by played as
+              {" " + capitalizeFirstLetter(state.filterColor)}
+            </Button>
           </p>
           <OpponentList
             opponents={state.topOpponents}

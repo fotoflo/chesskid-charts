@@ -106,10 +106,19 @@ export function processRatingData(
     endDate: Date;
     opponentLimit: number;
     opponentSortType: "rating" | "gameCount";
+    filterColor: "all" | "white" | "black";
   }
 ) {
-  const filteredData = filterByDate(data, options.startDate, options.endDate);
-  const ratingData = flattenRatingData(filteredData);
+  const filteredByDateData = filterByDate(
+    data,
+    options.startDate,
+    options.endDate
+  );
+  const filteredByColorData = filterByPlayerColor(
+    filteredByDateData,
+    options.filterColor
+  );
+  const ratingData = flattenRatingData(filteredByColorData);
 
   return {
     topOpponents: composeTopOpponents(
