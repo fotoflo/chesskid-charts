@@ -60,11 +60,11 @@ describe("flattenRatingData(dataWithItemsArray)", () => {
   });
 });
 
-describe("processRatingData(data,startDate,endDate)", () => {
+describe("processRatingData(data,{startDate,endDate})", () => {
   const startDate = new Date("2022-09-22");
   const endDate = new Date("2022-10-11");
 
-  it("should return data in the format expected by chartJS", () => {
+  it("should return lineChartData in the format expected by chartJS", () => {
     const result = processRatingData(data, { startDate, endDate });
 
     expect(result.lineChartData.datasets.length).toBe(1);
@@ -74,5 +74,45 @@ describe("processRatingData(data,startDate,endDate)", () => {
     expect(result.lineChartData.datasets[0].data[0].y).toBe(1302);
 
     expect(result.pieChartData).toBeDefined();
+  });
+
+  it("should return pieChartData in the format expected by chartJS", () => {
+    const result = processRatingData(data, { startDate, endDate });
+
+    expect(result.pieChartData.labels.length).toBe(3);
+    expect(result.pieChartData.labels[0]).toBe("Wins");
+    expect(result.pieChartData.datasets[0].data.length).toBe(3);
+    expect(result.pieChartData.datasets[0].data[0]).toBe(9);
+  });
+
+  it("should return topOpponents", () => {
+    const result = processRatingData(data, {
+      startDate,
+      endDate,
+      opponentLimit: 3,
+      opponentSortType: "gameCount",
+    });
+
+    expect(result.topOpponents.length).toBe(3);
+    expect(result.topOpponents[0].username).toBe("AngelDavidR");
+    expect(result.topOpponents[0].avatarUrl).toBe(
+      "https://www.chesskid.com/images/avatars/kids/100/kid-417.png"
+    );
+    expect(result.topOpponents[0].games.wins).toBe(2);
+    expect(result.topOpponents[0].games.losses).toBe(0);
+    expect(result.topOpponents[0].games.draws).toBe(0);
+    expect(result.topOpponents[0].games.count).toBe(2);
+  });
+
+  it("should return topOpponents with limit and sort working", () => {
+    const result = processRatingData(data, {
+      startDate,
+      endDate,
+      opponentLimit: 5,
+      opponentSortType: "rating",
+    });
+
+    expect(result.topOpponents.length).toBe(5);
+    expect(result.topOpponents[0].username).toBe("AbruptTest");
   });
 });
