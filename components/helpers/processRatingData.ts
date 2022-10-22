@@ -93,10 +93,13 @@ export function processRatingData(
   const filteredData = filterByDate(data, options.startDate, options.endDate);
   const ratingData = flattenRatingData(filteredData);
   return {
-    topOpponents: composeTopOpponents(ratingData, 3),
+    topOpponents: composeTopOpponents(
+      ratingData,
+      options.opponentlimit,
+      options.opponentSortType
+    ),
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
-    startDate: options.startDate,
-    endDate: options.endDate,
+    ...options,
   };
 }

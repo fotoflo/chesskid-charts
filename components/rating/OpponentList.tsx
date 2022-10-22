@@ -18,7 +18,7 @@ const OpponentList = ({ opponents, sortType, toggleSortType }: Props) => {
 
   return (
     <>
-      <Button onClick={toggleSortType}>{sortType}</Button>
+      <Button onClick={toggleSortType}>t: {sortType}</Button>
       <ul>
         {opponents.map((opponent) => {
           return (

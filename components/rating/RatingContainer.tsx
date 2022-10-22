@@ -8,6 +8,7 @@ import LineChart from "components/charts/LineChart";
 import { PieChart } from "components/charts/PieChart";
 import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
+import { de } from "date-fns/locale";
 
 type Props = {};
 
@@ -24,18 +25,13 @@ const RatingContainer = ({ fullData }) => {
     fullData.items[fullData.items.length - 1].finishDate * 1000
   );
 
-  const [opponentSortType, setOpponentSortType] = useState("rating");
-
-  const toggleOpponentSortType = () => {
-    opponentSortType === "rating"
-      ? setOpponentSortType("gameCount")
-      : setOpponentSortType("rating");
-  };
+  const initialOpponentSortType = "rating";
 
   const initialData = processRatingData(fullData, {
     startDate: initialStartDate,
     endDate: initialEndDate,
-    opponentSortType,
+    opponentlimit: 5,
+    opponentSortType: initialOpponentSortType,
   });
 
   const initialState = {
@@ -50,17 +46,32 @@ const RatingContainer = ({ fullData }) => {
 
       case "dateChange":
         const { endDate, focusedInput, startDate } = action.payload;
-        const processedData = processRatingData(fullData, {
+        const dateChangeData = processRatingData(fullData, {
           startDate,
           endDate,
-          opponentSortType,
         });
 
         return {
           focusedInput,
+          ...dateChangeData,
+        };
+      case "toggleSortType":
+        console.log("currentSortType", state.opponentSortType);
+        const newOpponentSortType =
+          state.opponentSortType === "rating" ? "gameCount" : "rating";
+        console.log("newOpponentSortType", newOpponentSortType);
+
+        const processedData = processRatingData(fullData, {
+          startDate: state.startDate,
+          endDate: state.endDate,
+          opponentSortType: newOpponentSortType,
+        });
+
+        console.log("processedData", processedData);
+
+        return {
           ...processedData,
         };
-
       default:
         throw new Error();
     }
@@ -97,8 +108,12 @@ const RatingContainer = ({ fullData }) => {
           </p>
           <OpponentList
             opponents={state.topOpponents}
-            sortType={opponentSortType}
-            toggleSortType={toggleOpponentSortType}
+            sortType={state.opponentSortType}
+            toggleSortType={() =>
+              dispatch({
+                type: "toggleSortType",
+              })
+            }
           />
         </Col>
         <Col md="6">
