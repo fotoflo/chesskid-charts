@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import { Button, Col, Container, Row } from "react-bootstrap";
@@ -36,7 +36,7 @@ const RatingContainer = ({ fullData }) => {
   const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
   const now = new Date();
   const backdate = new Date(now.setDate(now.getDate() - 30));
-  const initialStartDate = new Date(backdate).setHours(0, 0, 0, 0);
+  const initialStartDate = new Date(new Date(backdate).setHours(0, 0, 0, 0));
   const firstDate = new Date(
     fullData.items[fullData.items.length - 1].finishDate * 1000
   );
@@ -46,7 +46,7 @@ const RatingContainer = ({ fullData }) => {
   const initialData = processRatingData(fullData, {
     startDate: initialStartDate,
     endDate: initialEndDate,
-    opponentLimit: 3,
+    opponentLimit: 10,
     opponentSortType: initialOpponentSortType,
     filterColor: "all",
   });
@@ -116,9 +116,22 @@ const RatingContainer = ({ fullData }) => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
 
   return (
-    <ChartContainer fluid>
+    <ChartContainer fluid={true}>
       <Row>
-        <Col md="12">
+        <Col md="9">
+          <p> Total Games Played: {fullData.items.length}</p>
+          <p>
+            Games played in date range: &nbsp;
+            {state.lineChartData.datasets[0].data.length}
+            <br />
+            <Button onClick={() => dispatch({ type: "toggleFilterColor" })}>
+              Showing games by played as
+              {" " + capitalizeFirstLetter(state.filterColor)}
+            </Button>
+          </p>
+          <LineChart chartData={state.lineChartData} />
+        </Col>
+        <Col md="3">
           <DateRangeInput
             onDatesChange={(dateData) =>
               dispatch({ type: "dateChange", payload: dateData })
@@ -132,20 +145,9 @@ const RatingContainer = ({ fullData }) => {
             minBookingDate={firstDate}
             maxBookingDate={initialEndDate}
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col md="6">
-          <p> Total Games Played: {fullData.items.length}</p>
-          <p>
-            Games played in date range: &nbsp;
-            {state.lineChartData.datasets[0].data.length}
-            <br />
-            <Button onClick={() => dispatch({ type: "toggleFilterColor" })}>
-              Showing games by played as
-              {" " + capitalizeFirstLetter(state.filterColor)}
-            </Button>
-          </p>
+
+          <PieChart data={state.pieChartData} />
+
           <OpponentList
             opponents={state.topOpponents}
             sortType={state.opponentSortType}
@@ -156,23 +158,14 @@ const RatingContainer = ({ fullData }) => {
             }
           />
         </Col>
-        <Col md="6">
-          <PieChart data={state.pieChartData} />
-        </Col>
-      </Row>
-      <Row>
-        <Col md="12">
-          <LineChart chartData={state.lineChartData} />
-        </Col>
       </Row>
     </ChartContainer>
   );
 };
 
 const ChartContainer = styled(Container)`
-  // center the content
-  margin: 0 auto;
-  padding: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
   word-wrap: break-word;
 `;
 

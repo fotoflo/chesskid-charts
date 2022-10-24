@@ -25,11 +25,7 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
   return (
     <>
       <NavBar session={session} themeToggler={themeToggler} />
-      <Container>
-        <p>{hello.data.greeting}</p>
-
-
-        <Link href="/home">&lt; back</Link>>
+      <Container fluid={true}>
         <RatingContainer fullData={data} />
       </Container>
     </>
