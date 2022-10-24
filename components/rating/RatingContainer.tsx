@@ -70,9 +70,9 @@ const RatingContainer = ({ fullData }) => {
         const dateChangeData = processRatingData(fullData, {
           opponentLimit: state.opponentLimit,
           opponentSortType: state.opponentSortType,
+          filterColor: state.filterColor,
           startDate,
           endDate,
-          filterColor: "all",
         });
 
         return {
@@ -86,8 +86,8 @@ const RatingContainer = ({ fullData }) => {
           startDate: state.startDate,
           endDate: state.endDate,
           opponentLimit: state.opponentLimit,
+          filterColor: state.filterColor,
           opponentSortType: newOpponentSortType,
-          filterColor: "all",
         });
 
         return {
