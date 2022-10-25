@@ -80,14 +80,12 @@ const RatingContainer = ({ fullData }) => {
           ...dateChangeData,
         };
       case "toggleSortType":
-        const newOpponentSortType = toggleSortType(state.opponentSortType);
-
         processedData = processRatingData(fullData, {
           startDate: state.startDate,
           endDate: state.endDate,
           opponentLimit: state.opponentLimit,
           filterColor: state.filterColor,
-          opponentSortType: newOpponentSortType,
+          opponentSortType: action.payload,
         });
 
         return {
@@ -153,11 +151,7 @@ const RatingContainer = ({ fullData }) => {
             <OpponentList
               opponents={state.topOpponents}
               sortType={state.opponentSortType}
-              dispatchToggleSortType={() =>
-                dispatch({
-                  type: "toggleSortType",
-                })
-              }
+              dispatch={dispatch}
             />
           </Row>
         </Col>

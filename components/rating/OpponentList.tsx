@@ -16,11 +16,7 @@ type Props = {
   dispatchToggleSortType: () => void;
 };
 
-const OpponentList = ({
-  opponents,
-  sortType,
-  dispatchToggleSortType,
-}: Props) => {
+const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
   if (!opponents) {
     return <p> {`No games in this date range`} </p>;
   }
@@ -43,13 +39,17 @@ const OpponentList = ({
         <Button variant="light">Sort By: </Button>
         <Button
           variant={getButtonVariant(sortType, "rating")}
-          onClick={dispatchToggleSortType}
+          onClick={() =>
+            dispatch({ type: "toggleSortType", payload: "rating" })
+          }
         >
           Rating
         </Button>
         <Button
           variant={getButtonVariant(sortType, "gameCount")}
-          onClick={dispatchToggleSortType}
+          onClick={() =>
+            dispatch({ type: "toggleSortType", payload: "gameCount" })
+          }
         >
           Game Count
         </Button>
