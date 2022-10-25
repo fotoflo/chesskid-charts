@@ -10,7 +10,7 @@ type Props = {
       value: string;
       payload?: string;
       isVoid?: boolean;
-    }
+    }[]
   ];
   selectedValue: string;
   dispatchType: string;

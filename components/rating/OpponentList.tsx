@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { OpponentData } from "components/helpers/processRatingData.ts";
 
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { capitalizeFirstLetter } from "utils/stringUtils";
-import { toggleSortType } from "./RatingContainer";
 import { Container } from "react-bootstrap";
 import useWindowSize from "hooks/useWindowSize";
+import ButtonBar from "./ButtonBar";
 
 type Props = {
   opponents: OpponentData[];
@@ -17,43 +14,35 @@ type Props = {
 };
 
 const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
+  const windowSize = useWindowSize();
+
   if (!opponents) {
     return <p> {`No games in this date range`} </p>;
   }
 
-  const windowSize = useWindowSize();
-
-  const getButtonVariant = (
-    sortType: "rating" | "gameCount",
-    buttonName: "rating" | "gameCount"
-  ) => {
-    if (sortType === buttonName) {
-      return "primary";
-    }
-    return "secondary";
-  };
-
   return (
     <>
-      <ButtonGroup aria-label="Basic example">
-        <Button variant="light">Sort By: </Button>
-        <Button
-          variant={getButtonVariant(sortType, "rating")}
-          onClick={() =>
-            dispatch({ type: "toggleSortType", payload: "rating" })
-          }
-        >
-          Rating
-        </Button>
-        <Button
-          variant={getButtonVariant(sortType, "gameCount")}
-          onClick={() =>
-            dispatch({ type: "toggleSortType", payload: "gameCount" })
-          }
-        >
-          Game Count
-        </Button>
-      </ButtonGroup>
+      <ButtonBar
+        dispatch={dispatch}
+        dispatchType="toggleSortType"
+        selectedValue={sortType}
+        buttons={[
+          {
+            title: "Sort By",
+            value: "sortBy",
+            isVoid: true,
+          },
+          {
+            title: "Rating",
+            value: "rating",
+          },
+          {
+            title: "Game Count",
+            value: "gameCount",
+          },
+        ]}
+      />
+
       <ScrollContainer windowSize={windowSize}>
         <ul className="list-unstyled">
           {opponents.map((opponent) => {

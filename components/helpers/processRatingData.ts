@@ -121,6 +121,7 @@ export function processRatingData(
   const ratingData = flattenRatingData(filteredByColorData);
 
   return {
+    ...options,
     topOpponents: composeTopOpponents(
       ratingData,
       options.opponentLimit,
@@ -128,6 +129,5 @@ export function processRatingData(
     ),
     lineChartData: composeLineChartData(ratingData),
     pieChartData: composePieChartData(ratingData),
-    ...options,
   };
 }

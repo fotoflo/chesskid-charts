@@ -67,44 +67,24 @@ const RatingContainer = ({ fullData }) => {
         return { ...state, focusedInput: action.payload };
 
       case "dateChange":
-        const { endDate, focusedInput, startDate } = action.payload;
-        const dateChangeData = processRatingData(fullData, {
-          opponentLimit: state.opponentLimit,
-          opponentSortType: state.opponentSortType,
-          filterColor: state.filterColor,
+        const { endDate, startDate } = action.payload;
+
+        return processRatingData(fullData, {
+          ...state,
           startDate,
           endDate,
         });
-
-        return {
-          focusedInput,
-          ...dateChangeData,
-        };
       case "toggleSortType":
-        processedData = processRatingData(fullData, {
-          startDate: state.startDate,
-          endDate: state.endDate,
-          opponentLimit: state.opponentLimit,
-          filterColor: state.filterColor,
+        return processRatingData(fullData, {
+          ...state,
           opponentSortType: action.payload,
         });
 
-        return {
-          ...processedData,
-        };
-
       case "toggleFilterColor":
-        processedData = processRatingData(fullData, {
-          startDate: state.startDate,
-          endDate: state.endDate,
-          opponentLimit: state.opponentLimit,
-          opponentSortType: state.opponentSortType,
+        return processRatingData(fullData, {
+          ...state,
           filterColor: action.payload,
         });
-
-        return {
-          ...processedData,
-        };
       default:
         throw new Error();
     }
