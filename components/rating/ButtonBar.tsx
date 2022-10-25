@@ -32,7 +32,7 @@ const ButtonBar = ({
   selectedValue,
 }: Props) => {
   return (
-    <ButtonGroup aria-label="Basic example">
+    <ButtonGroup>
       {buttons.map((button) => {
         return (
           <Button

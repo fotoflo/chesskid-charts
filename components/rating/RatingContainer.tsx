@@ -2,7 +2,9 @@ import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import { Col, Container, Row } from "react-bootstrap";
-import { DateRangeInput } from "@datepicker-react/styled";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import LineChart from "components/charts/LineChart";
 import { PieChart } from "components/charts/PieChart";
@@ -44,19 +46,16 @@ const RatingContainer = ({ fullData }) => {
   type RatingState = ReturnType<typeof initialData>;
 
   function stateReducer(state: RatingState, action) {
-    let processedData;
-
     switch (action.type) {
-      case "focusChange":
-        return { ...state, focusedInput: action.payload };
-
-      case "dateChange":
-        const { endDate, startDate } = action.payload;
-
+      case "startDateChange":
         return processRatingData(fullData, {
           ...state,
-          startDate,
-          endDate,
+          startDate: action.payload,
+        });
+      case "endDateChange":
+        return processRatingData(fullData, {
+          ...state,
+          endDate: action.payload,
         });
       case "toggleSortType":
         return processRatingData(fullData, {
@@ -89,45 +88,58 @@ const RatingContainer = ({ fullData }) => {
         </Col>
         <Col md="3">
           <Row>
-            <DateRangeInput
-              onDatesChange={(dateData) =>
-                dispatch({ type: "dateChange", payload: dateData })
-              }
-              onFocusChange={(focusedInput) =>
-                dispatch({ type: "focusChange", payload: focusedInput })
-              }
-              startDate={state.startDate} // Date or null
-              endDate={state.endDate} // Date or null
-              focusedInput={state.focusedInput} // START_DATE, END_DATE or null
-              minBookingDate={firstDate}
-              maxBookingDate={initialEndDate}
-            />
+            <Col>
+              <DateContainer>
+                <DatePicker
+                  selected={state.startDate}
+                  minDate={firstDate}
+                  maxDate={initialEndDate}
+                  onChange={(newStartDate) => {
+                    dispatch({
+                      type: "startDateChange",
+                      payload: newStartDate,
+                    });
+                  }}
+                />
+
+                <DatePicker
+                  minDate={firstDate}
+                  maxDate={initialEndDate}
+                  selected={state.endDate}
+                  onChange={(newEndDate) => {
+                    dispatch({ type: "endDateChange", payload: newEndDate });
+                  }}
+                />
+              </DateContainer>
+            </Col>
           </Row>
           <Row>
-            <ButtonBar
-              dispatch={dispatch}
-              dispatchType="toggleFilterColor"
-              selectedValue={state.filterColor}
-              buttons={[
-                {
-                  title: "Played As",
-                  value: "playedAs",
-                  isVoid: true,
-                },
-                {
-                  title: "All",
-                  value: "all",
-                },
-                {
-                  title: "White",
-                  value: "white",
-                },
-                {
-                  title: "Black",
-                  value: "black",
-                },
-              ]}
-            />
+            <Col className="mt-2">
+              <ButtonBar
+                dispatch={dispatch}
+                dispatchType="toggleFilterColor"
+                selectedValue={state.filterColor}
+                buttons={[
+                  {
+                    title: "Played As",
+                    value: "playedAs",
+                    isVoid: true,
+                  },
+                  {
+                    title: "All",
+                    value: "all",
+                  },
+                  {
+                    title: "White",
+                    value: "white",
+                  },
+                  {
+                    title: "Black",
+                    value: "black",
+                  },
+                ]}
+              />
+            </Col>
           </Row>
           <Row className="mt-4">
             <PieChart data={state.pieChartData} />
@@ -151,7 +163,8 @@ const ChartContainer = styled(Container)`
   word-wrap: break-word;
 `;
 
-const MTRow = styled(Row)`
+const DateContainer = styled(Container)`
+  z-index: 1;
   margin-top: 5px;
 `;
 
