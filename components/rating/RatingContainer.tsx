@@ -28,7 +28,7 @@ export const toggleFilterColor = (filterColor: "all" | "white" | "black") => {
   }
 };
 
-const RatingContainer = ({ fullData, theme }) => {
+const RatingContainer = ({ fullData }) => {
   if (!fullData) {
     return;
   }
@@ -116,7 +116,7 @@ const RatingContainer = ({ fullData, theme }) => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
 
   return (
-    <ChartContainer fluid={true}>
+    <ChartContainer fluid={true} className="mt-2">
       <Row>
         <Col md="9">
           <p> Total Games Played: {fullData.items.length}</p>
@@ -132,7 +132,7 @@ const RatingContainer = ({ fullData, theme }) => {
           <LineChart chartData={state.lineChartData} />
         </Col>
         <Col md="3">
-          <Row className="mt-1">
+          <Row>
             <DateRangeInput
               onDatesChange={(dateData) =>
                 dispatch({ type: "dateChange", payload: dateData })
@@ -147,10 +147,10 @@ const RatingContainer = ({ fullData, theme }) => {
               maxBookingDate={initialEndDate}
             />
           </Row>
-          <Row className="mt-1">
+          <Row className="mt-4">
             <PieChart data={state.pieChartData} />
           </Row>
-          <Row className="mt-1">
+          <Row className="mt-4">
             <OpponentList
               opponents={state.topOpponents}
               sortType={state.opponentSortType}
@@ -171,6 +171,10 @@ const ChartContainer = styled(Container)`
   padding-left: 3em;
   padding-right: 3em;
   word-wrap: break-word;
+`;
+
+const MTRow = styled(Row)`
+  margin-top: 5px;
 `;
 
 export default RatingContainer;
