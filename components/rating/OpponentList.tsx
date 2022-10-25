@@ -13,7 +13,7 @@ import useWindowSize from "hooks/useWindowSize";
 type Props = {
   opponents: OpponentData[];
   sortType: "rating" | "gameCount";
-  dispatchToggleSortType: () => void;
+  dispatch: () => void;
 };
 
 const OpponentList = ({ opponents, sortType, dispatch }: Props) => {

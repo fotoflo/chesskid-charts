@@ -10,6 +10,7 @@ import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
 
 import { capitalizeFirstLetter } from "utils/stringUtils";
+import ButtonBar from "./ButtonBar";
 
 type Props = {};
 
@@ -93,14 +94,12 @@ const RatingContainer = ({ fullData }) => {
         };
 
       case "toggleFilterColor":
-        const newFilterColor = toggleFilterColor(state.filterColor);
-
         processedData = processRatingData(fullData, {
           startDate: state.startDate,
           endDate: state.endDate,
           opponentLimit: state.opponentLimit,
           opponentSortType: state.opponentSortType,
-          filterColor: newFilterColor,
+          filterColor: action.payload,
         });
 
         return {
@@ -121,10 +120,6 @@ const RatingContainer = ({ fullData }) => {
             Games played in date range: &nbsp;
             {state.lineChartData.datasets[0].data.length}
             <br />
-            <Button onClick={() => dispatch({ type: "toggleFilterColor" })}>
-              Showing games by played as
-              {" " + capitalizeFirstLetter(state.filterColor)}
-            </Button>
           </p>
           <LineChart chartData={state.lineChartData} />
         </Col>
@@ -142,6 +137,32 @@ const RatingContainer = ({ fullData }) => {
               focusedInput={state.focusedInput} // START_DATE, END_DATE or null
               minBookingDate={firstDate}
               maxBookingDate={initialEndDate}
+            />
+          </Row>
+          <Row>
+            <ButtonBar
+              dispatch={dispatch}
+              dispatchType="toggleFilterColor"
+              selectedValue={state.filterColor}
+              buttons={[
+                {
+                  title: "Played As",
+                  value: "playedAs",
+                  isVoid: true,
+                },
+                {
+                  title: "All",
+                  value: "all",
+                },
+                {
+                  title: "White",
+                  value: "white",
+                },
+                {
+                  title: "Black",
+                  value: "black",
+                },
+              ]}
             />
           </Row>
           <Row className="mt-4">
