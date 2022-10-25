@@ -132,31 +132,35 @@ const RatingContainer = ({ fullData, theme }) => {
           <LineChart chartData={state.lineChartData} />
         </Col>
         <Col md="3">
-          <DateRangeInput
-            onDatesChange={(dateData) =>
-              dispatch({ type: "dateChange", payload: dateData })
-            }
-            onFocusChange={(focusedInput) =>
-              dispatch({ type: "focusChange", payload: focusedInput })
-            }
-            startDate={state.startDate} // Date or null
-            endDate={state.endDate} // Date or null
-            focusedInput={state.focusedInput} // START_DATE, END_DATE or null
-            minBookingDate={firstDate}
-            maxBookingDate={initialEndDate}
-          />
-
-          <PieChart data={state.pieChartData} />
-
-          <OpponentList
-            opponents={state.topOpponents}
-            sortType={state.opponentSortType}
-            dispatchToggleSortType={() =>
-              dispatch({
-                type: "toggleSortType",
-              })
-            }
-          />
+          <Row className="mt-1">
+            <DateRangeInput
+              onDatesChange={(dateData) =>
+                dispatch({ type: "dateChange", payload: dateData })
+              }
+              onFocusChange={(focusedInput) =>
+                dispatch({ type: "focusChange", payload: focusedInput })
+              }
+              startDate={state.startDate} // Date or null
+              endDate={state.endDate} // Date or null
+              focusedInput={state.focusedInput} // START_DATE, END_DATE or null
+              minBookingDate={firstDate}
+              maxBookingDate={initialEndDate}
+            />
+          </Row>
+          <Row className="mt-1">
+            <PieChart data={state.pieChartData} />
+          </Row>
+          <Row className="mt-1">
+            <OpponentList
+              opponents={state.topOpponents}
+              sortType={state.opponentSortType}
+              dispatchToggleSortType={() =>
+                dispatch({
+                  type: "toggleSortType",
+                })
+              }
+            />
+          </Row>
         </Col>
       </Row>
     </ChartContainer>
