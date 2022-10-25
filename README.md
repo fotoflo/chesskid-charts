@@ -10,5 +10,11 @@ How to use it:
 
 1. clone the repository
 2. cd into the directory and type `npm install`
-3. run `npm run dev`
-4. open your browser to https://localhost:3000/rating
+3. Turn on your MySQL DB (I use MAMP)
+4. run `npm run dev`
+5. open your browser to https://localhost:3000/rating
+
+# errors 
+Error: Error serializing `.context.req` returned from `getServerSideProps` in "/".
+
+Did you start the database?
