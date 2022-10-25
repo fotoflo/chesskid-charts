@@ -119,7 +119,6 @@ const RatingContainer = ({ fullData }) => {
     <ChartContainer fluid={true} className="mt-2">
       <Row>
         <Col md="9">
-          <p> Total Games Played: {fullData.items.length}</p>
           <p>
             Games played in date range: &nbsp;
             {state.lineChartData.datasets[0].data.length}

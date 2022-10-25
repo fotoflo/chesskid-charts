@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { OpponentData } from "components/helpers/processRatingData.ts";
 
 import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { capitalizeFirstLetter } from "utils/stringUtils";
 import { toggleSortType } from "./RatingContainer";
 import { Container } from "react-bootstrap";
@@ -26,11 +27,33 @@ const OpponentList = ({
 
   const windowSize = useWindowSize();
 
+  const getButtonVariant = (
+    sortType: "rating" | "gameCount",
+    buttonName: "rating" | "gameCount"
+  ) => {
+    if (sortType === buttonName) {
+      return "primary";
+    }
+    return "secondary";
+  };
+
   return (
     <>
-      <Button onClick={dispatchToggleSortType}>
-        Sort By {capitalizeFirstLetter(toggleSortType(sortType))}
-      </Button>
+      <ButtonGroup aria-label="Basic example">
+        <Button variant="light">Sort By: </Button>
+        <Button
+          variant={getButtonVariant(sortType, "rating")}
+          onClick={dispatchToggleSortType}
+        >
+          Rating
+        </Button>
+        <Button
+          variant={getButtonVariant(sortType, "gameCount")}
+          onClick={dispatchToggleSortType}
+        >
+          Game Count
+        </Button>
+      </ButtonGroup>
       <ScrollContainer windowSize={windowSize}>
         <ul className="list-unstyled">
           {opponents.map((opponent) => {
