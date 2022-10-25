@@ -28,7 +28,7 @@ export const toggleFilterColor = (filterColor: "all" | "white" | "black") => {
   }
 };
 
-const RatingContainer = ({ fullData }) => {
+const RatingContainer = ({ fullData, theme }) => {
   if (!fullData) {
     return;
   }
