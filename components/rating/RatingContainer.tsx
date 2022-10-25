@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import styled from "styled-components";
 
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { DateRangeInput } from "@datepicker-react/styled";
 
 import LineChart from "components/charts/LineChart";
@@ -9,25 +9,9 @@ import { PieChart } from "components/charts/PieChart";
 import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
 
-import { capitalizeFirstLetter } from "utils/stringUtils";
 import ButtonBar from "./ButtonBar";
 
 type Props = {};
-
-export const toggleSortType = (sortType: "rating" | "gameCount") => {
-  return sortType === "rating" ? "gameCount" : "rating";
-};
-
-export const toggleFilterColor = (filterColor: "all" | "white" | "black") => {
-  switch (filterColor) {
-    case "all":
-      return "white";
-    case "white":
-      return "black";
-    case "black":
-      return "all";
-  }
-};
 
 const RatingContainer = ({ fullData }) => {
   if (!fullData) {
