@@ -10,12 +10,13 @@ import {
   Tooltip,
 } from "chart.js";
 import { Container } from "react-bootstrap";
+import { withTheme } from "styled-components";
 import styled from "styled-components";
 import useWindowSize from "hooks/useWindowSize";
 
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip);
 
-export default function LineChart({ chartData }: Props) {
+const LineChart = ({ chartData, theme }) => {
   const options = {
     plugins: {
       legend: {
@@ -34,6 +35,7 @@ export default function LineChart({ chartData }: Props) {
         },
       },
     },
+    borderColor: theme.fontColor,
   };
 
   const { height, width } = useWindowSize();
@@ -43,7 +45,9 @@ export default function LineChart({ chartData }: Props) {
       <Line data={chartData} options={options} />
     </LineChartCointainer>
   );
-}
+};
+
+export default withTheme(LineChart);
 
 const LineChartCointainer = styled(Container)`
   padding-left: 1em;
