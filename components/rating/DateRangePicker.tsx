@@ -17,45 +17,40 @@ const DateRangePickerComponent = ({
   return (
     <>
       <DatePickerContainer>
-        <Row>
-          <Col md={12}>
-            <StyledDatePicker
-              selectsStart
-              selected={startDate}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={minDate}
-              maxDate={maxDate}
-              onChange={onChangeStartDate}
-            />
-
-            <StyledDatePicker
-              selectsEnd
-              selected={endDate}
-              startDate={startDate}
-              endDate={endDate}
-              minDate={minDate}
-              maxDate={maxDate}
-              onChange={onChangeEndDate}
-            />
-          </Col>
-        </Row>
+        <StyledDatePicker
+          selectsStart
+          selected={startDate}
+          startDate={startDate}
+          endDate={endDate}
+          minDate={minDate}
+          maxDate={maxDate}
+          onChange={onChangeStartDate}
+        />
+        <span>➡</span>
+        <StyledDatePicker
+          selectsEnd
+          selected={endDate}
+          startDate={startDate}
+          endDate={endDate}
+          minDate={minDate}
+          maxDate={maxDate}
+          onChange={onChangeEndDate}
+        />
       </DatePickerContainer>
     </>
   );
 };
 
 const DatePickerContainer = styled(Container).attrs({
-  className: "flex-row",
+  className: "d-flex flex-row justify-content-center align-items-center",
 })`
-  border: 4px solid purple;
+  padding: 0;
+  margin: 0;
 `;
 
 const StyledDatePicker = styled(DatePicker).attrs({
   className: "p-1",
 })`
-  display: inline;
-  border: 2px solid red;
   width: 105px;
 `;
 
