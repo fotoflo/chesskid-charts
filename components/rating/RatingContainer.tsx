@@ -3,15 +3,13 @@ import styled from "styled-components";
 
 import { Col, Container, Row } from "react-bootstrap";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import LineChart from "components/charts/LineChart";
 import { PieChart } from "components/charts/PieChart";
 import { processRatingData } from "components/helpers/processRatingData";
 import OpponentList from "components/rating/OpponentList";
 
 import ButtonBar from "./ButtonBar";
+import DateRangePicker from "./DateRangePicker";
 
 type Props = {};
 
@@ -20,11 +18,11 @@ const RatingContainer = ({ fullData }) => {
     return;
   }
 
-  const initialEndDate = new Date(new Date().setHours(0, 0, 0, 0));
+  const maxDate = new Date(new Date().setHours(0, 0, 0, 0));
   const now = new Date();
   const backdate = new Date(now.setDate(now.getDate() - 30));
   const initialStartDate = new Date(new Date(backdate).setHours(0, 0, 0, 0));
-  const firstDate = new Date(
+  const minDate = new Date(
     fullData.items[fullData.items.length - 1].finishDate * 1000
   );
 
@@ -32,7 +30,7 @@ const RatingContainer = ({ fullData }) => {
 
   const initialData = processRatingData(fullData, {
     startDate: initialStartDate,
-    endDate: initialEndDate,
+    endDate: maxDate,
     opponentLimit: 10,
     opponentSortType: initialOpponentSortType,
     filterColor: "all",
@@ -89,28 +87,24 @@ const RatingContainer = ({ fullData }) => {
         <Col md="3">
           <Row>
             <Col>
-              <DateContainer>
-                <DatePicker
-                  selected={state.startDate}
-                  minDate={firstDate}
-                  maxDate={initialEndDate}
-                  onChange={(newStartDate) => {
-                    dispatch({
-                      type: "startDateChange",
-                      payload: newStartDate,
-                    });
-                  }}
-                />
-
-                <DatePicker
-                  minDate={firstDate}
-                  maxDate={initialEndDate}
-                  selected={state.endDate}
-                  onChange={(newEndDate) => {
-                    dispatch({ type: "endDateChange", payload: newEndDate });
-                  }}
-                />
-              </DateContainer>
+              <DateRangePicker
+                startDate={state.startDate}
+                endDate={state.endDate}
+                minDate={minDate}
+                maxDate={maxDate}
+                onChangeStartDate={(newStartDate) => {
+                  dispatch({
+                    type: "startDateChange",
+                    payload: newStartDate,
+                  });
+                }}
+                onChangeEndDate={(newEndDate) => {
+                  dispatch({
+                    type: "endDateChange",
+                    payload: newEndDate,
+                  });
+                }}
+              />
             </Col>
           </Row>
           <Row>
