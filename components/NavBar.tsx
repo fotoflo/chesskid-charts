@@ -50,6 +50,7 @@ const StyledNavbar = styled(Navbar)`
   transform: translatex(-50%);
   width: 95%;
   margin-bottom: 2rem;
+  white-space: nowrap;
 `;
 
 export default NavBar;
