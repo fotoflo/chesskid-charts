@@ -31,7 +31,7 @@ const RatingContainer = ({ fullData }) => {
   const initialData = processRatingData(fullData, {
     startDate: initialStartDate,
     endDate: maxDate,
-    opponentLimit: 10,
+    opponentLimit: 20,
     opponentSortType: initialOpponentSortType,
     filterColor: "all",
   });

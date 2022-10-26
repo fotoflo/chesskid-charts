@@ -9,6 +9,9 @@ import {
   LineElement,
   Tooltip,
 } from "chart.js";
+import { Container } from "react-bootstrap";
+import styled from "styled-components";
+import useWindowSize from "hooks/useWindowSize";
 
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip);
 
@@ -21,6 +24,8 @@ export default function LineChart({ chartData }: Props) {
     },
     animation: false,
     response: true,
+    maintainAspectRatio: false,
+    responsive: true,
     scales: {
       x: {
         type: "time",
@@ -31,5 +36,17 @@ export default function LineChart({ chartData }: Props) {
     },
   };
 
-  return <Line data={chartData} options={options} />;
+  const { height, width } = useWindowSize();
+
+  return (
+    <LineChartCointainer height={height}>
+      <Line data={chartData} options={options} />
+    </LineChartCointainer>
+  );
 }
+
+const LineChartCointainer = styled(Container)`
+  padding-left: 1em;
+  padding-right: 1em;
+  height: ${(props) => props.height - 160}px;
+`;
