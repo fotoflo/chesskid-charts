@@ -88,9 +88,8 @@ const OpponentItem = styled.li`
 const ScrollContainer = styled(Container)`
   overflow-y: scroll;
   height: ${(props) => {
-    return props.windowSize.height - 450 + "px";
+    return props.windowSize.height - 500 + "px";
   }};
-  border-bottom: 2px solid grey;
 `;
 
 export default OpponentList;

@@ -14,6 +14,12 @@ ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip);
 
 export default function LineChart({ chartData }: Props) {
   const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    animation: false,
     response: true,
     scales: {
       x: {
