@@ -73,15 +73,30 @@ const RatingContainer = ({ fullData }) => {
 
   const [state, dispatch] = useReducer(stateReducer, initialState);
 
+  const filterColorButtons = [
+    {
+      title: `${state.lineChartData.datasets[0].data.length} Games as`,
+      value: "playedAs",
+      isVoid: true,
+    },
+    {
+      title: "All",
+      value: "all",
+    },
+    {
+      title: "White",
+      value: "white",
+    },
+    {
+      title: "Black",
+      value: "black",
+    },
+  ];
+
   return (
     <ChartContainer fluid={true} className="mt-2">
       <Row>
         <Col md="9">
-          <p>
-            Games played in date range: &nbsp;
-            {state.lineChartData.datasets[0].data.length}
-            <br />
-          </p>
           <LineChart chartData={state.lineChartData} />
         </Col>
         <Col md="3">
@@ -131,26 +146,6 @@ const RatingContainer = ({ fullData }) => {
     </ChartContainer>
   );
 };
-
-const filterColorButtons = [
-  {
-    title: "Played As",
-    value: "playedAs",
-    isVoid: true,
-  },
-  {
-    title: "All",
-    value: "all",
-  },
-  {
-    title: "White",
-    value: "white",
-  },
-  {
-    title: "Black",
-    value: "black",
-  },
-];
 
 const ChartContainer = styled(Container)`
   padding-left: 3em;
