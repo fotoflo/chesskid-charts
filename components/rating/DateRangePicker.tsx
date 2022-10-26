@@ -63,6 +63,7 @@ const Arrow = styled.span`
 const DatePickerContainer = styled.span.attrs({
   className: "d-flex flex-row justify-content-center align-items-center",
 })`
+  border-radius: 5px;
   padding: 0px 10px;
   border: 1px solid #ced4da;
 `;
@@ -70,6 +71,8 @@ const DatePickerContainer = styled.span.attrs({
 const StyledDatePicker = styled(DatePicker).attrs({
   className: "p-1",
 })`
+  background-color: ${(props) => props.theme.formControl};
+  color: ${(props) => props.theme.fontColor};
   border: none;
   width: 105px;
 `;

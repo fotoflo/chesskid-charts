@@ -19,24 +19,6 @@ export const useTheme = () => {
   return [theme, themeToggler];
 };
 
-const reactDatepicker = {
-  daySize: [36, 40],
-  fontFamily: "system-ui, -apple-system",
-  margin: "10px",
-  inputLabelMargin: "0 25px 0 25px",
-  inputMargin: "0%",
-  inputPadding: "0px 0px 0px 40px",
-  inputFontSize: "0.8rem",
-  inputCalendarWrapperLeft: "20px",
-  inputCalendarWrapperTop: "12px",
-  dateRangeArrowIconWidth: "10px",
-  inputMinHeight: "25px",
-  inputWidth: "95%",
-  colors: {
-    accessibility: "#D80249",
-  },
-};
-
 export const lightTheme = {
   themeName: "light",
   background: "white",
@@ -49,22 +31,20 @@ export const lightTheme = {
   1: "grey", // not in word, grey
   2: "#EAB935", // wrong slot, yellow
   3: "#61C211", // correct slot, gren
-  reactDatepicker,
 };
 
 export const darkTheme = {
   themeName: "dark",
   background: "#171717", // almost black
   formControl: "#2E2E2E", // a dark grey
+  standout: "#E63946", // red
   fontColor: "LightGray", // white
   InfoBGColor: "#240026",
   secondary: "#9E3BA1",
-  standout: "Purple",
   0: "black", // black, Blank
   1: "grey", // not in word, grey
   2: "#EAB935", // wrong slot, yellow
   3: "#61C211", // correct slot, green
-  reactDatepicker,
 };
 
 export const GlobalStyles = createGlobalStyle`
