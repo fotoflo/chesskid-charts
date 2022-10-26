@@ -108,32 +108,13 @@ const RatingContainer = ({ fullData }) => {
             </Col>
           </Row>
           <Row>
-            <Col className="mt-2">
-              <ButtonBar
-                dispatch={dispatch}
-                dispatchType="toggleFilterColor"
-                selectedValue={state.filterColor}
-                buttons={[
-                  {
-                    title: "Played As",
-                    value: "playedAs",
-                    isVoid: true,
-                  },
-                  {
-                    title: "All",
-                    value: "all",
-                  },
-                  {
-                    title: "White",
-                    value: "white",
-                  },
-                  {
-                    title: "Black",
-                    value: "black",
-                  },
-                ]}
-              />
-            </Col>
+            <ButtonBar
+              className="mt-3"
+              dispatch={dispatch}
+              dispatchType="toggleFilterColor"
+              selectedValue={state.filterColor}
+              buttons={filterColorButtons}
+            />
           </Row>
           <Row className="mt-4">
             <PieChart data={state.pieChartData} />
@@ -151,15 +132,30 @@ const RatingContainer = ({ fullData }) => {
   );
 };
 
+const filterColorButtons = [
+  {
+    title: "Played As",
+    value: "playedAs",
+    isVoid: true,
+  },
+  {
+    title: "All",
+    value: "all",
+  },
+  {
+    title: "White",
+    value: "white",
+  },
+  {
+    title: "Black",
+    value: "black",
+  },
+];
+
 const ChartContainer = styled(Container)`
   padding-left: 3em;
   padding-right: 3em;
   word-wrap: break-word;
-`;
-
-const DateContainer = styled(Container)`
-  z-index: 1;
-  margin-top: 5px;
 `;
 
 export default RatingContainer;

@@ -13,6 +13,22 @@ type Props = {
   dispatch: () => void;
 };
 
+const buttonList = [
+  {
+    title: "Sort By",
+    value: "sortBy",
+    isVoid: true,
+  },
+  {
+    title: "Rating",
+    value: "rating",
+  },
+  {
+    title: "Game Count",
+    value: "gameCount",
+  },
+];
+
 const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
   const windowSize = useWindowSize();
 
@@ -23,24 +39,11 @@ const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
   return (
     <>
       <ButtonBar
+        className={"mb-2"}
         dispatch={dispatch}
         dispatchType="toggleSortType"
         selectedValue={sortType}
-        buttons={[
-          {
-            title: "Sort By",
-            value: "sortBy",
-            isVoid: true,
-          },
-          {
-            title: "Rating",
-            value: "rating",
-          },
-          {
-            title: "Game Count",
-            value: "gameCount",
-          },
-        ]}
+        buttons={buttonList}
       />
 
       <ScrollContainer windowSize={windowSize}>

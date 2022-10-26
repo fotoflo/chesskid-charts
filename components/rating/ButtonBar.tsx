@@ -3,18 +3,19 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
+type Button = {
+  title: string;
+  value: string;
+  payload?: string;
+  isVoid?: boolean;
+};
+
 type Props = {
-  buttons: [
-    {
-      title: string;
-      value: string;
-      payload?: string;
-      isVoid?: boolean;
-    }[]
-  ];
+  buttons: Button[];
   selectedValue: string;
   dispatchType: string;
   dispatch: Function;
+  className?: string;
 };
 
 const getVariant = (selectedValue: string, value: string, isVoid?: boolean) => {
@@ -30,10 +31,11 @@ const ButtonBar = ({
   dispatch,
   dispatchType,
   selectedValue,
+  className,
 }: Props) => {
   return (
-    <ButtonGroup>
-      {buttons.map((button) => {
+    <ButtonGroup className={className}>
+      {buttons.map((button: Button) => {
         return (
           <Button
             key={button.value}
