@@ -25,8 +25,9 @@ export const lightTheme = {
   formControl: "white", // a dark grey
   fontColor: "#000", // black
   InfoBGColor: "ivory",
-  standout: "red",
+  standout: "darkslateblue",
   secondary: "#9E3BA1",
+  grey: "#C3C3C3",
   0: "white", // White, Blank
   1: "grey", // not in word, grey
   2: "#EAB935", // wrong slot, yellow
@@ -41,6 +42,7 @@ export const darkTheme = {
   fontColor: "LightGray", // white
   InfoBGColor: "#240026",
   secondary: "#9E3BA1",
+  grey: "#9E9E9E",
   0: "black", // black, Blank
   1: "grey", // not in word, grey
   2: "#EAB935", // wrong slot, yellow

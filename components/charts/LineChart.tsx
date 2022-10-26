@@ -28,17 +28,42 @@ const LineChart = ({ chartData, theme }) => {
     maintainAspectRatio: false,
     responsive: true,
     scales: {
+      y: {
+        ticks: {
+          color: theme.fontColor,
+        },
+        grid: {
+          color: theme.grey,
+        },
+      },
       x: {
         type: "time",
         time: {
           unit: "day",
         },
+        ticks: {
+          color: theme.fontColor,
+        },
+        grid: {
+          display: false,
+        },
       },
     },
-    borderColor: theme.fontColor,
+    borderColor: theme.grey,
+    elements: {
+      point: {
+        pointBorderColor: theme.standout,
+        radius: 2,
+        borderWidth: 6,
+        hoverRadius: 5,
+      },
+      line: {
+        borderColor: theme.fontColor,
+      },
+    },
   };
 
-  const { height, width } = useWindowSize();
+  const { height } = useWindowSize();
 
   return (
     <LineChartCointainer height={height}>
