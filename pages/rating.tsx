@@ -6,10 +6,17 @@ import RatingContainer from "components/rating/RatingContainer";
 import Link from "next/link";
 import { Container } from "react-bootstrap";
 import { ServersideSessionHandler } from "lib/middleware";
+
 import { useSession } from "next-auth/react";
 import NavBar from "../components/NavBar";
 
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { createContext } from "server/context";
+import { appRouter } from "server/routers/_app";
+
 import { trpc } from "../utils/trpc";
+import superjson from "superjson";
+
 import Loading from "../components/Loading";
 import loginToChesskid from "server/puppets/LoginToChesskid";
 
@@ -46,7 +53,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
   }
 
-  const cookie = await loginToChesskid(username, password);
+  // const cookie = await loginToChesskid(username, password);
+
+  const ssg = createProxySSGHelpers({
+    router: appRouter,
+    ctx: await createContext(),
+    transformer: superjson,
+  });
+  const id = context.params?.id as string;
+
+  let cookie = await ssg.chesskidCookie.fetch({
+    username,
+    password,
+  });
+
+  console.log("cookie from trpc", cookie);
+
+  if (!cookie) {
+    cookie = await loginToChesskid(username, password);
+    console.log("cookie from puppeteer", cookie);
+  }
 
   // fetch with a cookie
   const response = await fetch(
@@ -55,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       headers: {
         accept: "*/*",
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        cookie: `PHPSESSID=${cookie}`,
+        cookie: `PHPSESSID=${process.env.CHESSKID_PHPSESSID_COOKIE}`,
       },
       method: "GET",
     }

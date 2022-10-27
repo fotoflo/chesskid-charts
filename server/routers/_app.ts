@@ -13,6 +13,20 @@ export const appRouter = router({
         greeting: `hello ${input?.text ?? "world"}`,
       };
     }),
+  chesskidCookie: publicProcedure
+    .input(
+      z.object({
+        username: z.string(),
+        password: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      if (input.username == "dionz") {
+        return {
+          PHPSESSID_COOKIE: process.env.CHESSKID_PHPSESSID_COOKIE,
+        };
+      } else return null;
+    }),
 });
 
 // export type definition of API
