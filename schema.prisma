@@ -4,8 +4,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+  provider = "prisma-client-js"
 }
 
 model Account {
@@ -22,7 +21,8 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chesskidToken chesskidToken[]
 
   @@unique([provider, providerAccountId])
 }
@@ -51,4 +51,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model chesskidToken {
+  id       String   @id @default(cuid())
+  account  Account  @relation(fields: [id], references: [id], onDelete: Cascade)
+  username String
+  token    String
+  expires  DateTime
 }
