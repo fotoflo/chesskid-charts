@@ -1,7 +1,6 @@
 import fsPromises from "fs/promises";
 
 import type { NextPage } from "next";
-import Head from "next/head";
 
 import RatingContainer from "components/rating/RatingContainer";
 import Link from "next/link";
@@ -33,12 +32,25 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const jsonData = await fsPromises.readFile(
-    "sampleData/fullData.json", // fullData.json or shortSample.json
-    "utf8"
+  // fetch with a cookie
+  const response = await fetch(
+    `https://www.chesskid.com/callback/users/${process.env.CHESSKID_USERNAME}/game-history?&limit=10000`,
+    {
+      headers: {
+        accept: "*/*",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        cookie: `PHPSESSID=${process.env.CHESSKID_PHPSESSID_COOKIE}`,
+      },
+      method: "GET",
+    }
   );
-  const data = JSON.parse(jsonData);
-  let session = await ServersideSessionHandler(context);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch game history");
+  }
+
+  const data = await response.json();
+
   const props = {
     data,
   };
