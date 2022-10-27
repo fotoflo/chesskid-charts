@@ -45,8 +45,8 @@ const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
         selectedValue={sortType}
         buttons={buttonList}
       />
-
-      <ScrollContainer windowSize={windowSize}>
+      s
+      <ScrollContainer windowsize={windowSize}>
         <ul className="list-unstyled">
           {opponents.map((opponent) => {
             return (
@@ -88,7 +88,7 @@ const OpponentItem = styled.li`
 const ScrollContainer = styled(Container)`
   overflow-y: scroll;
   height: ${(props) => {
-    return props.windowSize.height - 500 + "px";
+    return props.windowsize.height - 500 + "px";
   }};
 `;
 
