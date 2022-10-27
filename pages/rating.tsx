@@ -11,6 +11,7 @@ import NavBar from "../components/NavBar";
 
 import { trpc } from "../utils/trpc";
 import Loading from "../components/Loading";
+import loginToChesskid from "server/puppets/LoginToChesskid";
 
 const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
   const { data: session, status } = useSession();
@@ -32,14 +33,29 @@ const Rating: NextPage = ({ data, auth, themeToggler, ...props }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // get the chesskid.com PHPSESSID cookie
+
+  const [username, password] = [
+    process.env.CHESSKID_USERNAME,
+    process.env.CHESSKID_PASSWORD,
+  ];
+
+  if (!username || !password) {
+    throw new Error(
+      "CHESSKID_USERNAME and CHESSKID_PASSWORD must be set in .env"
+    );
+  }
+
+  const cookie = await loginToChesskid(username, password);
+
   // fetch with a cookie
   const response = await fetch(
-    `https://www.chesskid.com/callback/users/${process.env.CHESSKID_USERNAME}/game-history?&limit=10000`,
+    `https://www.chesskid.com/callback/users/${username}/game-history?&limit=10000`,
     {
       headers: {
         accept: "*/*",
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        cookie: `PHPSESSID=${process.env.CHESSKID_PHPSESSID_COOKIE}`,
+        cookie: `PHPSESSID=${cookie}`,
       },
       method: "GET",
     }
@@ -59,16 +75,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props,
   };
 };
-
-// export async function getStaticProps(context) {
-//   const jsonData = await fsPromises.readFile(
-//     "sampleData/fullData.json",
-//     "utf8"
-//   );
-//   const data = JSON.parse(jsonData);
-//   return {
-//     props: data, // will be passed to the page component as props
-//   };
-// }
 
 export default Rating;
