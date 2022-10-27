@@ -12,7 +12,10 @@ How to use it:
 2. cd into the directory and type `npm install`
 3. Turn on your MySQL DB (I use MAMP)
 4. run `npm run dev`
-5. open your browser to https://localhost:3000/rating
+
+5. login to chesskid.com, grab your username cookie and move it to .env.local
+
+6. open your browser to https://localhost:3000/rating
 
 # errors 
 Error: Error serializing `.context.req` returned from `getServerSideProps` in "/".
