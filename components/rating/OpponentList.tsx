@@ -45,7 +45,6 @@ const OpponentList = ({ opponents, sortType, dispatch }: Props) => {
         selectedValue={sortType}
         buttons={buttonList}
       />
-      s
       <ScrollContainer windowsize={windowSize}>
         <ul className="list-unstyled">
           {opponents.map((opponent) => {
