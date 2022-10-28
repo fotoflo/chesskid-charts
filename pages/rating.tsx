@@ -62,16 +62,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   const id = context.params?.id as string;
 
-  let cookie = await ssg.chesskidCookie.fetch({
+  let cookie = await ssg.getChesskidCookie.fetch({
     username,
     password,
   });
 
-  console.log("cookie from trpc", cookie);
+  console.log("🍪 cookie from trpc", cookie);
 
   if (!cookie) {
     cookie = await loginToChesskid(username, password);
-    console.log("cookie from puppeteer", cookie);
+    console.log("🍪!!!!!! cookie from puppeteer", cookie);
+    let response = await ssg.setChesskidCookie.fetch(cookie);
   }
 
   // fetch with a cookie

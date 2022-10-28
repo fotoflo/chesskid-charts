@@ -25,7 +25,7 @@ export const lightTheme = {
   formControl: "white", // a dark grey
   fontColor: "#000", // black
   InfoBGColor: "ivory",
-  standout: "#2753FB",
+  standout: "black",
   secondary: "#9E3BA1",
   grey: "#C3C3C3",
   0: "white", // White, Blank

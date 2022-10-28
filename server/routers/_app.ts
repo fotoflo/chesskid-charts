@@ -13,7 +13,7 @@ export const appRouter = router({
         greeting: `hello ${input?.text ?? "world"}`,
       };
     }),
-  chesskidCookie: publicProcedure
+  getChesskidCookie: publicProcedure
     .input(
       z.object({
         username: z.string(),
@@ -26,6 +26,11 @@ export const appRouter = router({
           PHPSESSID_COOKIE: process.env.CHESSKID_PHPSESSID_COOKIE,
         };
       } else return null;
+    }),
+  setChesskidCookie: publicProcedure
+    .input(z.string())
+    .query(async ({ input }) => {
+      console.log("🍪🍪🍪🍪 set cookie: ", input);
     }),
 });
 
