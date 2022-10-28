@@ -9,7 +9,7 @@ describe("Login to Chesskid", () => {
     const result = await loginToChesskid(user, pass);
     console.log(result);
     expect(result).toBeDefined();
-  }, 10000); // set the timeout on a single test
+  }, 20000); // set the timeout on a single test
 
   it("should fail to login to Chesskid and return an error", async () => {
     const [user, pass] = ["", ""];
@@ -18,5 +18,5 @@ describe("Login to Chesskid", () => {
     } catch (e) {
       expect(e).toBeDefined();
     }
-  });
+  }, 20000);
 });
