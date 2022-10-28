@@ -71,8 +71,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!cookie) {
     cookie = await loginToChesskid(username, password);
+    if (typeof cookie !== "string") {
+      throw new Error("cookie is not a string");
+    }
     console.log("🍪!!!!!! cookie from puppeteer", cookie);
-    let response = await ssg.setChesskidCookie.fetch(cookie);
+    let res = await ssg.setChesskidCookie.fetch(cookie);
+    console.log(res);
   }
 
   // fetch with a cookie
