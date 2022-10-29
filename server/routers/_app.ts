@@ -1,3 +1,4 @@
+import { Cookies } from "next/dist/server/web/spec-extension/cookies";
 import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
 
@@ -22,15 +23,15 @@ export const appRouter = router({
     )
     .query(async ({ input }) => {
       if (input.username == "dionz") {
-        return {
-          PHPSESSID_COOKIE: process.env.CHESSKID_PHPSESSID_COOKIE,
-        };
+        console.log("returning dion's cookie from .env.local");
+        return process.env.CHESSKID_PHPSESSID_COOKIE;
       } else return null;
     }),
   setChesskidCookie: publicProcedure
     .input(z.string())
-    .query(async ({ input }) => {
+    .mutation(async ({ input }) => {
       console.log("🍪🍪🍪🍪 set cookie: ", input);
+      return "true";
     }),
 });
 
