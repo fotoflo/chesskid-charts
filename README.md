@@ -3,6 +3,7 @@ NextJS tool to visual ChessKid game data
 Login to chess kid and then your game data from  https://www.chesskid.com/callback/users/{username}/game-history?&limit=10000
 
 Note to self: My son's username is Dionz (case sensitive)
+https://www.chesskid.com/callback/users/Dionz/game-history?&limit=10000
 
 Paste the data into sampleData/fullData.json
 

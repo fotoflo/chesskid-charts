@@ -9,7 +9,7 @@ export const ServersideSessionHandler = async (context: NextPageContext) => {
   //   : [];
 
   // console.log("SESSION", session);
-  console.log("CONTEXT", context.req.url);
+  // console.log("CONTEXT", context.req.url);
 
   if (session) {
     return {
@@ -23,7 +23,6 @@ export const ServersideSessionHandler = async (context: NextPageContext) => {
   return {
     props: {
       data: session,
-      context,
     },
   };
 };

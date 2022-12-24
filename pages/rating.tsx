@@ -81,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // fetch with a cookie
   const response = await fetch(
-    `https://www.chesskid.com/callback/users/${username}/game-history?&limit=10000`,
+    `https://www.chesskid.com/callback/users/${username}/game-history?&limit=1000`,
     {
       headers: {
         accept: "*/*",
@@ -98,12 +98,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const data = await response.json();
 
-  const props = {
-    data,
-  };
-
   return {
-    props,
+    props: {
+      data,
+    },
   };
 };
 
